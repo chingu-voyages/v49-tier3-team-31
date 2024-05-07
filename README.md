@@ -132,7 +132,7 @@ Install this project with:
 - GitHub: [gladdy17](https://github.com/Gladdy17)
 - LinkedIn : [gladdy](https://linkedin.com/in/)
 
-👤 **Lincoln Gibson**
+👤 **Jonatan**
 - GitHub: [jcidp](https://github.com/jcidp)
 - LinkedIn : [jcidp](https://linkedin.com/in/)
 
