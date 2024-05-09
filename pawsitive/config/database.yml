@@ -17,8 +17,8 @@ default: &default
   encoding: unicode
   host: localhost
   port: 5432
-  username: gladdy
-  password: "12345"
+  username:
+  password:
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -27,8 +27,8 @@ development:
   <<: *default
   database: pawsitive_development
   host: localhost
-  username: gladdy
-  password: "12345"
+  username:
+  password:
   port: 5432
 
   # The specified database role being used to connect to PostgreSQL.
@@ -65,8 +65,8 @@ test:
   <<: *default
   database: pawsitive_test
   host: localhost
-  username: gladdy
-  password: "12345"
+  username:
+  password:
   port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,
