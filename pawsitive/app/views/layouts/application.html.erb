@@ -11,10 +11,10 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
       <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
-      <%= yield %>
-    </main>
+      <%= render "home/navbar" %>
+      <%= yield %> 
+      <%= render "home/footer" %>
   </body>
 </html>
