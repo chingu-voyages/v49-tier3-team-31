@@ -1,5 +1,5 @@
   <% if current_user.role == 'member' %>
-    <section class="w-full overflow-hidden">
+    <section class="w-full overflow-hidden mt-5 px-4">
         <div class="sm:flex sm:w-[80%] xs:w-[90%] gap-4">
           <div class="flex flex-col gap-1 rounded self-start w-[100%] sm:w-[30%] p-2">
             <div class="rounded-full ">
@@ -24,7 +24,7 @@
           <div class="flex flex-col gap-1 rounded">
             <% if current_user.photos.attached? %>
               <% current_user.photos.each do |photo| %>
-                <%= image_tag(photo, class:"rounded-xl lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] xs:w-[7rem] xs:h-[7rem] outline outline-2 outline-offset-2 outline-blue-500 ") %>
+                <%= image_tag(photo, class:"flex-1 rounded-xl lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] xs:w-[7rem] xs:h-[7rem] outline outline-2 outline-offset-2 outline-blue-500 ") %>
               <% end %>
             <% else %>
               <p>No photos attached.</p>
