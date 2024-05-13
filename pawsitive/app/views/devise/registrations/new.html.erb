@@ -14,6 +14,10 @@
     <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
   </div>
 
+  <div class="field">
+    <%= f.label :avatar, "Avatar" %><br />
+    <%= f.file_field :avatar %>
+  </div>
 
   <div class="field">
     <%= f.label :photos, "Photos" %><br />
