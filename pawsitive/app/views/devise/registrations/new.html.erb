@@ -1,63 +1,54 @@
-<div>
-<h2>Sign up</h2>
+<div class="flex flex-col justify-center sm:px-6 sm:py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'bg-transparent shadow-2xl rounded px-8 pt-6 pb-8 mx-auto'}) do |f| %>
+      <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-700">Sign up</h2>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <%
+        label_classes = "block text-sm font-medium leading-6 text-gray-700 #{alert ? "text-red-500" : "text-gray-700"}"
+        input_classes = "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 #{alert ? "border-red-500" : nil}"
+      %>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
-  </div>
+      <div class="mb-4">
+        <%= f.label :first_name, "First Name", class: label_classes %>
+        <%= f.text_field :first_name, autofocus: true, placeholder: "First Name", class: input_classes %>
+      </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
-  </div>
+       <div class="mb-4">
+        <%= f.label :last_name, "Last Name", class: label_classes %>
+        <%= f.text_field :last_name, autofocus: true, placeholder: "Last Name", class: input_classes %>
+      </div>
 
-  <div class="field">
-    <%= f.label :avatar, "Avatar" %><br />
-    <%= f.file_field :avatar %>
-  </div>
+      <div class="mb-4">
+        <%= f.label :email, "Email", class: label_classes %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: input_classes %>
+      </div>
 
-  <div class="field">
-    <%= f.label :photos, "Photos" %><br />
-    <%= f.file_field :photos %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="mb-4">
+        <%= f.label :password, "Password", class: label_classes %>
+        <% if @minimum_password_length %>
+          <em class="block text-sm font-normal mb-2 text-gray-700">(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: input_classes %>
+      </div> 
 
-        <div class="field block mb-2 font-extrabold">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
+      <div class="mb-4">
+        <%= f.label :password_confirmation, "Confirm password", class: label_classes %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password", class: input_classes %>
+      </div>
+
+      <div class="mb-4 flex flex-col">
+        <%= f.label :role, "Role", class: label_classes %>
+        <%= f.select :role, options_for_select(['user', 'member'],selected: 'user'),
+        class: "peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 empty:!bg-gray-900 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 flex-1" %>
+      </div>
+
+      <div class="flex flex-col selection:items-center justify-between content-end">
+        <%= f.submit "Register", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2" %>
+        <div class="flex flex-col gap-1">
+          <%= render "devise/shared/links" %>
         </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+    <% end %>
   </div>
-
-<div data-controller="role">
-  <div class="field">
-    <%= f.label :role, "Role" %><br>
-    <%= f.select :role, options_for_select(['user', 'member'],selected: 'user'), data: { action: "change->role#togglePriceField" } %>
-  </div>
-  
-  <div class="price-field" style="display: none;" data-role-target="priceField" id="priceField">
-    <%= f.label :price %><br />
-    <%= f.number_field :price, in: 1..200 %>
-  </div>
-</div>
-  
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
 </div>
