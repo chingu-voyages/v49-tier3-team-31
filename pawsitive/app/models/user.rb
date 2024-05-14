@@ -9,7 +9,31 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
   validates :role, presence: true
+  validates :bio, length: { maximum: 500 }
   enum role: { user: 0, member: 1 }
+
+  after_commit :add_default_avatar, on: %i[create update]
+
+  def avatar_thumbnail
+    if avatar.attached?
+      avatar.variant(resize: '150x150!')
+    else
+      '/default_image.jpeg'
+    end
+  end
+
+  private
+
+  def add_default_avatar
+    return if avatar.attached?
+    
+    avatar.attach(
+      io: File.open(
+        Rails.root.join('app', 'assets', 'images', 'default_image.jpeg')
+),
+      filename: 'default_image.jpeg',
+      content_type: 'image/jpeg'
+)
+  end
 end
