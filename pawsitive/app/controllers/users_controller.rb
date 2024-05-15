@@ -4,4 +4,9 @@ class UsersController < ApplicationController
   def show
     current_user = User.find_by(id: params[:id])
   end
+
+  def destroy
+    session.clear
+    redirect_to root_path
+  end
 end
