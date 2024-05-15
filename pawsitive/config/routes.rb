@@ -11,6 +11,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
    root "home#index"
-   delete '/sessions', to: 'sessions#destroy'
 
 end
