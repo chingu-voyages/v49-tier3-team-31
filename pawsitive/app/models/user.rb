@@ -15,6 +15,8 @@ class User < ApplicationRecord
 
   after_commit :add_default_avatar, on: %i[create update]
 
+  scope :members, -> { where(role: "member") }
+
   def avatar_thumbnail
     if avatar.attached?
       avatar.variant(resize: '150x150!')

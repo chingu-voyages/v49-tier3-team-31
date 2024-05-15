@@ -176,7 +176,9 @@
     <% end %>
   </section>
   <section class="flex-1">
-    Show search results
+    <% @members.each_with_index do |member, i| %>
+      <%= render partial: "member_card", locals: {member: member, index: i + 1} %>
+    <% end %>
   </section class="flex-1">
   <section>
     Show map
