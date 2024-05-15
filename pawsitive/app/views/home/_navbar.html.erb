@@ -21,9 +21,11 @@
             <div class="hidden lg:flex lg:items-center gap-x-2">
                 <% if user_signed_in? %>
                     <%= link_to "Profile", user_path(current_user.id), class: "flex items-center justify-center rounded-md bg-[#4A3BFF] text-white px-6 py-2.5 font-semibold hover:shadow-lg hover:drop-shadow transition duration-200" %>
+                    <%= button_to "Logout", destroy_user_session_path, class: "flex items-center justify-center rounded-md bg-[#4A3BFF] text-white px-6 py-2.5 font-semibold hover:shadow-lg hover:drop-shadow transition duration-200", method: :delete  %>
                 <% else %>
                     <%= link_to "Sign up", new_user_registration_path, class: "flex items-center text-black dark:text-white justify-center px-6 py-2.5 font-semibold"  %> 
                     <%= link_to "Login", new_user_session_path, class: "flex items-center justify-center rounded-md bg-[#4A3BFF] text-white px-6 py-2.5 font-semibold hover:shadow-lg hover:drop-shadow transition duration-200"  %> 
+                    
                 <% end %>
             </div>
             <div class="flex items-center justify-center lg:hidden">
