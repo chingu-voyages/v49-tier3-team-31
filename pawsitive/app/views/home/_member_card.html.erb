@@ -1,1 +1,20 @@
-<p><%= member.first_name + " " + member.last_name %></p>
+<%= link_to member, target: :_blank do %>
+  <div class="py-4 px-4 border-b border-l-4 border-l-transparent hover:border-l-blue-600">
+    <div class="flex items-center">
+      <div class="w-24 h-24 overflow-hidden rounded-full">
+        <%= image_tag(member.avatar, class: "aspect-square h-full w-full") %>
+      </div>
+      <div class="mx-4">
+        <h2 class="text-2xl font-semibold"><%= "#{index}. #{member.first_name} #{member.last_name.first}." %></h2>
+        <p>Short description</p>
+        <p>Location</p>
+      </div>
+      <div class="ml-auto text-right">
+        <p>from</p>
+        <p class="text-blue-700 text-2xl font-bold">$<%= member.price %></p>
+        <p>per night</p>
+      </div>
+    </div>
+    <p class="my-4"><%= member.bio %></p>
+  </div>
+<% end %>

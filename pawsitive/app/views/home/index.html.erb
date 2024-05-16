@@ -1,5 +1,5 @@
-<div class="flex flex-1">
-  <section class="bg-slate-200 basis-20 shrink-0 px-1">
+<div class="flex flex-1 bg-slate-200 pt-1">
+  <section class="basis-20 shrink-0 px-1">
     <%= form_with do |f| %>
       <div class="bg-white px-4 pb-1 leading-8">
         <fieldset class="mb-4">
@@ -175,12 +175,12 @@
       </div>
     <% end %>
   </section>
-  <section class="flex-1">
+  <section class="bg-white flex-[4]">
     <% @members.each_with_index do |member, i| %>
       <%= render partial: "member_card", locals: {member: member, index: i + 1} %>
     <% end %>
-  </section class="flex-1">
-  <section>
+  </section>
+  <section class="bg-white flex-[3]">
     Show map
   </section>
 </div>
