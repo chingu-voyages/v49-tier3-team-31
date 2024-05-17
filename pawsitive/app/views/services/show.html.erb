@@ -1,0 +1,81 @@
+<% if current_user.role == 'user' %>
+  <section class="w-full flex flex-col gap-4 overflow-hidden mt-5 px-8">
+    <div class="sm:flex sm:w-[100%] xs:w-[90%] gap-4">
+      <div class="flex flex-col gap-1 rounded self-start w-[100%] sm:w-[30%] p-4">
+        <div class="rounded-full ">
+          <% if @member.avatar.present? %>
+            <%= image_tag(@member.avatar, class: "w-20 h-20 rounded-full", alt:'') %>
+          <% end %>
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <h3 class="font-extrabold">
+            <span class="text-2xl capitalize"><%= @member.first_name %></span>
+            <span class="text-2xl capitalize"><%= @member.last_name.slice(0,1) %>.</span>
+          </h3>
+        </div>
+        <div class="flex flex-col gap-1">
+          <p class="bg-yellow-300 w-16 text-center text-xs capitalize">star sitter</p>
+          <p class="text-center text-sm capitalize w-24">Edmonton,AB,AB</p>
+        </div>
+        <%= link_to new_booking_path, class: "flex-1 text-center rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2 capitalize" do %>
+          Contact <%= @member.first_name %> <%= @member.last_name.slice(0,1) %>.
+        <% end %>
+      </div>
+      <div class="flex flex-col gap-1 rounded">
+      <% if @member.photos.attached? %>
+        <% @member.photos.each do |photo| %>
+          <%= image_tag(photo, class:"flex-1 rounded-xl lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] xs:w-[7rem] xs:h-[7rem] outline outline-2 outline-offset-2 outline-blue-500 ") %>
+        <% end %>
+      <% else %>
+        <p>No photos attached.</p>
+      <% end %>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-6">
+      <div class="service p-4 bg-white rounded-lg shadow-md border ">
+        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Services</h3>
+        <div class="flex justify-between">
+          <h2 class="text-2xl font-semibold text-gray-900"><%= @service.service_type %></h2>
+            <% prices = JSON.parse(@service.price.to_s.gsub('=>', ':')) %>
+            <p class="text-pretty text-xs ml-2">Lowest Price: $<span class="text-lg"><%= prices.values.min %></span></p>
+        </div>
+        <p class="text-gray-700 text-xs"><%= @service.description %></p>
+
+        <div class="w-[80%] flex justify-center items-center px-2 mt-4">
+          <button class="flex-1 rounded-full antialiased border capitalize" >See additional rates</button>
+        </div>
+      <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Availability:</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <% JSON.parse(@service.availability.to_s.gsub('=>', ':')).each do |day, hours| %>
+          <li class="ml-4">
+            <strong class="text-gray-800"><%= day %>:</strong> <%= hours['open'] %> - <%= hours['close'] %>
+          </li>
+        <% end %>
+      </ul>
+      
+      <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Pricing:</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <% JSON.parse(@service.price.to_s.gsub('=>', ':')).each do |size, cost| %>
+          <li class="ml-4">
+            <strong class="text-gray-800"><%= size.humanize %>:</strong> $<%= cost %>
+          </li>
+        <% end %>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Size Range:</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <% JSON.parse(@service.size.to_s.gsub('=>', ':')).each do |size, range| %>
+          <li class="ml-4">
+            <strong class="text-gray-800"><%= size.humanize %>:</strong> <%= range %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="p-4">
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Reviews</h3>
+      <div class="flex gap-2">
+      Company Reviews goes here....
+      </div>
+    </div>
+  </section>
+<% end %>
