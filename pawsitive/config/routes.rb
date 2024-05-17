@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :users, only: [:show]
+  resources :users, only: [] do
+    get :profile, on: :collection
+  end
+
   resources :bookings, only: [:new, :create]
+  resources :services, only: [:index, :show, :new, :create]
+  
   get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
