@@ -177,10 +177,10 @@
   </section>
   <section class="flex-1">
     Show search results
-  </section class="flex-1">
-  <section>
-    Show map
   </section>
+  <section class="bg-slate-200 basis-20 shrink-0 px-1">
+   <%= js_map [{latitude: 37.7829, longitude: -122.4190 }],id: "cities-map", width: "800px", height: "2000px"%>
+  </section> 
 </div>
 <script>
     let slider = new RangeSlider('.range-slider', {
