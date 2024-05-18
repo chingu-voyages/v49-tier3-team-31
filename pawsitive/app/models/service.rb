@@ -1,5 +1,5 @@
 class Service < ApplicationRecord
-  belongs_to :member, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :member, class_name: 'User', foreign_key: 'member_id'
   has_many :bookings, dependent: :destroy
 
   validates :service_type, presence: true, inclusion: { in: %w[Dog\ Sitting Dog\ Boarding Dog] }
