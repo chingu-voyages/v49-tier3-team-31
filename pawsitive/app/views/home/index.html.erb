@@ -176,8 +176,8 @@
     <% end %>
   </section>
   <section class="bg-white flex-[4]">
-    <% @members.each_with_index do |member, i| %>
-      <%= render partial: "member_card", locals: {member: member, index: i + 1} %>
+    <% @services.each_with_index do |service, i| %>
+      <%= render partial: "service_card", locals: {service: service, index: i + 1} %>
     <% end %>
   </section>
   <section class="flex-[3] px-1">

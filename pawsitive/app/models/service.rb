@@ -8,4 +8,6 @@ class Service < ApplicationRecord
   validates :price, presence: true
   validates :size, presence: true
 
+  scope :boarding, -> { where(service_type: "Dog Boarding") }
+
 end

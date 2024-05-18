@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @members = User.members
+    @services = Service.boarding
   end
 end

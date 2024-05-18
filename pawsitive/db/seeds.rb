@@ -93,7 +93,7 @@ def create_services(user, i)
     holiday_rate: (i + 1) * 8,
     additional_pet: (i + 1) * 2,
     puppy_rate: (i + 1) * 6
-  },
+  }
   availability = i % 3 == 0 ? %w[s th f sa] : %w[s m t w th f sa]
   sizes = i % 2 == 0 ? %w[s m l] : %w[s m l xl]
   ["Dog Sitting", "Dog Boarding"].each do |service_type|
