@@ -46,13 +46,12 @@
         </div>
       <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Availability:</h3>
       <ul class="list-disc list-inside text-gray-700">
-        <% JSON.parse(@service.availability.to_s.gsub('=>', ':')).each do |day, hours| %>
+        <% JSON.parse(@service.availability.to_s).each do |day| %>
           <li class="ml-4">
-            <strong class="text-gray-800"><%= day %>:</strong> <%= hours['open'] %> - <%= hours['close'] %>
+            <strong class="text-gray-800"><%= day %></strong>
           </li>
         <% end %>
       </ul>
-      
       <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Pricing:</h3>
       <ul class="list-disc list-inside text-gray-700">
         <% JSON.parse(@service.price.to_s.gsub('=>', ':')).each do |size, cost| %>
