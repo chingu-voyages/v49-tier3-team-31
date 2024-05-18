@@ -94,7 +94,7 @@ def create_services(user, i)
     additional_pet: (i + 1) * 2,
     puppy_rate: (i + 1) * 6
   }
-  availability = i % 3 == 0 ? %w[s th f sa] : %w[s m t w th f sa]
+  availability = i % 3 == 0 ? %w[Sunday Thursday Friday Saturday] : %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
   sizes = i % 2 == 0 ? %w[s m l] : %w[s m l xl]
   ["Dog Sitting", "Dog Boarding"].each do |service_type|
     service = {
