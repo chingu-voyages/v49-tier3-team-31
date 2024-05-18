@@ -180,9 +180,9 @@
       <%= render partial: "member_card", locals: {member: member, index: i + 1} %>
     <% end %>
   </section>
-  <section class="bg-white flex-[3]">
-    Show map
-  </section>
+  <section class="flex-[3] px-1">
+   <%= js_map [{latitude: 37.7829, longitude: -122.4190 }],id: "cities-map", height: "100%"%>
+  </section> 
 </div>
 <script>
     let slider = new RangeSlider('.range-slider', {
