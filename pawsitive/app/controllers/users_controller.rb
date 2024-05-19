@@ -5,4 +5,8 @@ class UsersController < ApplicationController
     current_user = User.find_by(id: params[:id])
   end
 
+
+  def update_profile
+
+  end
 end
