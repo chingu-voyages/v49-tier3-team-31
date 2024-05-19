@@ -1,10 +1,7 @@
 class HomeController < ApplicationController
   def index
-    if params[:filters]
-      @services = Service.filtered params[:filters]
-    else
-      @services = Service.boarding
-    end
+    #@services = Service.test params[:min_price]
+    @services = Service.filtered params[:filters]
   end
 
   private

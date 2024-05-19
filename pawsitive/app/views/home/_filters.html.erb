@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "filters" do %>
-  <%= form_with scope: "filters", url: "/", method: :get do |f| %>
+
+  <%= form_with scope: "filters", method: :get, data: { turbo_frame: "services" } do |f| %>
     <div class="bg-white px-4 pb-1 leading-8">
       <fieldset class="mb-4">
         <%= f.label :service_type, class: "block" %>
@@ -91,7 +91,6 @@
     </div>
     <%= render partial: "filters_details", locals: {f: f} %>
   <% end %>
-<% end %>
 <script>
     let slider = new RangeSlider('.range-slider', {
       values: [1, 250],
