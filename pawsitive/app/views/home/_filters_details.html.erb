@@ -1,0 +1,104 @@
+<div class="px-4 mt-4 leading-9">
+  <%= f.fields_for :filters do |filters| %>
+    <div class="flex justify-between">
+      <span>Filters</span>
+      <button type="reset" class="text-blue-700 font-semibold">Reset all</button>
+    </div>
+    <fieldset class="my-4">
+      <%= filters.fields_for :housing_conditions do |housing_conditions| %>
+      <legend class="font-semibold">Housing Conditions</legend>
+      <div class="w-full border-t border-slate-500 h-2"></div>
+        <div>
+          <%= housing_conditions.check_box :has_house %>
+          <%= housing_conditions.label :has_house, "Has house (excludes apartments)" %>
+        </div>
+        <div>
+          <%= housing_conditions.check_box :has_fence %>
+          <%= housing_conditions.label :has_fence, "Has fenced yard" %>
+        </div>
+        <div>
+          <%= housing_conditions.check_box :furniture_allowed %>
+          <%= housing_conditions.label :furniture_allowed, "Dogs allowed on furniture" %>
+        </div>
+        <div>
+          <%= housing_conditions.check_box :bed_allowed %>
+          <%= housing_conditions.label :bed_allowed, "Dogs allowed on bed" %>
+        </div>
+        <div>
+          <%= housing_conditions.check_box :no_smoking %>
+          <%= housing_conditions.label :no_smoking, "Non-smoking home" %>
+        </div>
+      <% end %>
+    </fieldset>
+    <fieldset class="my-4">
+      <%= filters.fields_for :pets_in_home do |pets_in_home| %>
+        <legend class="font-semibold">Pets in the home</legend>
+        <div class="w-full border-t border-slate-500 h-2"></div>
+        <div>
+          <%= pets_in_home.check_box :no_dog %>
+          <%= pets_in_home.label :no_dog, "Doesn't own a dog" %>
+        </div>
+        <div>
+          <%= pets_in_home.check_box :no_cat %>
+          <%= pets_in_home.label :no_cat, "Doesn't own a cat" %>
+        </div>
+        <div>
+          <%= pets_in_home.check_box :one_at_a_time %>
+          <%= pets_in_home.label :one_at_a_time, "Accepts only one client at a time" %>
+        </div>
+        <div>
+          <%= pets_in_home.check_box :no_caged_pets %>
+          <%= pets_in_home.label :no_caged_pets, "Does not own caged pets" %>
+        </div>
+      <% end %>
+    </fieldset>
+    <fieldset class="my-4">
+      <%= filters.fields_for :children_in_home do |children_in_home| %>
+        <legend class="font-semibold">Children in the home</legend>
+        <div class="w-full border-t border-slate-500 h-2"></div>
+        <div>
+          <%= children_in_home.check_box :none %>
+          <%= children_in_home.label :none, "Has no children" %>
+        </div>
+        <div>
+          <%= children_in_home.check_box :none_0_to_5 %>
+          <%= children_in_home.label :none_0_to_5, "No children 0-5 years old" %>
+        </div>
+        <div>
+          <%= children_in_home.check_box :none_6_to_12 %>
+          <%= children_in_home.label :none_6_to_12, "No children 6-12 years old" %>
+        </div>
+      <% end %>
+    </fieldset>
+    <fieldset class="my-4">
+      <%= filters.fields_for :additional_services do |additional_services| %>
+        <legend class="font-semibold">Additional services</legend>
+        <div class="w-full border-t border-slate-500 h-2"></div>
+        <div>
+          <%= additional_services.check_box :puppy_care %>
+          <%= additional_services.label :puppy_care, "Puppy care" %>
+        </div>
+        <div>
+          <%= additional_services.check_box :cat_care %>
+          <%= additional_services.label :cat_care, "Cat care" %>
+        </div>
+        <div>
+          <%= additional_services.check_box :accepts_unspayed_females %>
+          <%= additional_services.label :accepts_unspayed_females, "Accepts unspayed female dogs" %>
+        </div>
+        <div>
+          <%= additional_services.check_box :accepts_non_neutered_male %>
+          <%= additional_services.label :accepts_non_neutered_male, "Accepts non neutered male dogs" %>
+        </div>
+        <div>
+          <%= additional_services.check_box :bathing_grooming %>
+          <%= additional_services.label :bathing_grooming, "Bathing / Grooming" %>
+        </div>
+        <div>
+          <%= additional_services.check_box :first_aid %>
+          <%= additional_services.label :first_aid, "Dog first-aid / CPR" %>
+        </div>
+      <% end %>
+    </fieldset>
+  <% end %>
+</div>
