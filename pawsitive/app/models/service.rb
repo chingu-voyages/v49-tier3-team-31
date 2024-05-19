@@ -15,9 +15,4 @@ class Service < ApplicationRecord
     Service.where(service_type: filters[:service_type])
       .where("price -> 'base_rate' BETWEEN ? AND ?", filters[:price][:min], filters[:price][:max])
   end
-
-  def self.test(min_price)
-    return Service.where(service_type: "Dog Boarding") if min_price.nil?
-    Service.where("price -> 'base_rate' >= ?", min_price)
-  end
 end

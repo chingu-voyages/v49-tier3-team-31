@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-    #@services = Service.test params[:min_price]
     @services = Service.filtered params[:filters]
   end
 

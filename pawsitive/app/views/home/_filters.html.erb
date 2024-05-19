@@ -1,111 +1,91 @@
-
-  <%= form_with scope: "filters", method: :get, data: { turbo_frame: "services" } do |f| %>
-    <div class="bg-white px-4 pb-1 leading-8">
-      <fieldset class="mb-4">
-        <%= f.label :service_type, class: "block" %>
-        <%= f.select :service_type, ["Dog Boarding", "Dog Sitting"], {}, class: "w-full" %>
-      </fieldset>
-      <fieldset class="my-4">
-        <%= f.label :location, "Near" %>
-        <%= f.text_field :location, placeholder: "Zip code or Address" %>
-      </fieldset>
-      <fieldset class="my-4">
-        <p>Dates</p>
-        <div class="flex w-full">
-          <%= f.fields_for :dates do |dates| %>
-            <%= dates.text_field :start, class: "w-32", placeholder: "Drop off", onfocus: "this.type='date';this.showPicker();", onblur: "this.type='text'" %>
-            <svg class="inline w-4 mx-1 fill-slate-400" viewBox="0 0 32 32"><path d="M26.793 17H3a1 1 0 110-2h23.793L21.5 9.707a1 1 0 011.414-1.414l6.647 6.646a1.5 1.5 0 010 2.122l-6.647 6.646a1 1 0 01-1.414-1.414L26.793 17z"></path></svg>
-            <%= dates.text_field :end, class: "w-32", placeholder: "Pick up", onfocus: "this.type='date';this.showPicker();", onblur: "this.type='text'" %>
-        <% end %>
+<%= form_with scope: "filters", method: :get, data: { turbo_frame: "services" } do |f| %>
+  <div class="bg-white px-4 pb-1 leading-8">
+    <fieldset class="mb-4">
+      <%= f.label :service_type, class: "block" %>
+      <%= f.select :service_type, ["Dog Boarding", "Dog Sitting"], {}, class: "w-full", onchange: "this.form.requestSubmit()" %>
+    </fieldset>
+    <fieldset class="my-4">
+      <%= f.label :location, "Near" %>
+      <%= f.text_field :location, placeholder: "Zip code or Address", onchange: "this.form.requestSubmit()" %>
+    </fieldset>
+    <fieldset class="my-4">
+      <p>Dates</p>
+      <div class="flex w-full">
+        <%= f.fields_for :dates do |dates| %>
+          <%= dates.text_field :start, class: "w-32", placeholder: "Drop off", onfocus: "this.type='date';this.showPicker();", onblur: "this.type='text'", onchange: "this.form.requestSubmit()" %>
+          <svg class="inline w-4 mx-1 fill-slate-400" viewBox="0 0 32 32"><path d="M26.793 17H3a1 1 0 110-2h23.793L21.5 9.707a1 1 0 011.414-1.414l6.647 6.646a1.5 1.5 0 010 2.122l-6.647 6.646a1 1 0 01-1.414-1.414L26.793 17z"></path></svg>
+          <%= dates.text_field :end, class: "w-32", placeholder: "Pick up", onfocus: "this.type='date';this.showPicker();", onblur: "this.type='text'", onchange: "this.form.requestSubmit()" %>
+      <% end %>
+      </div>
+    </fieldset>
+    <fieldset class="my-4">
+      <p>How many pets?</p>
+      <div class="flex justify-around">
+        <div>
+          <%= f.label :pet_number_1, "1" %>
+          <%= f.radio_button :pet_number, "1", onchange: "this.form.requestSubmit()" %>
         </div>
-      </fieldset>
-      <fieldset class="my-4">
-        <p>How many pets?</p>
-        <div class="flex justify-around">
+        <div>
+          <%= f.label :pet_number_2, "2" %>
+          <%= f.radio_button :pet_number, "2", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div>
+          <%= f.label :pet_number_3, "3+" %>
+          <%= f.radio_button :pet_number, "3", onchange: "this.form.requestSubmit()" %>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="my-4">
+      <p>Pet type(s)</p>
+      <div class="flex justify-around">
+        <%= f.fields_for :pet_types do |pet_types| %>
           <div>
-            <%= f.label :pet_number_1, "1" %>
-            <%= f.radio_button :pet_number, "1" %>
+            <%= pet_types.label :dog, "Dog" %>
+            <%= pet_types.check_box :dog, checked: true, onchange: "this.form.requestSubmit()" %>
           </div>
           <div>
-            <%= f.label :pet_number_2, "2" %>
-            <%= f.radio_button :pet_number, "2" %>
-          </div>
-          <div>
-            <%= f.label :pet_number_3_or_more, "3+" %>
-            <%= f.radio_button :pet_number, "3" %>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset class="my-4">
-        <p>Pet type(s)</p>
-        <div class="flex justify-around">
-          <%= f.fields_for :pet_types do |pet_types| %>
-            <div>
-              <%= pet_types.label :dog, "Dog" %>
-              <%= pet_types.check_box :dog, checked: true %>
-            </div>
-            <div>
-              <%= pet_types.label :cat, "Cat" %>
-              <%= pet_types.check_box :cat %>
-            </div>
-          <% end %>
-        </div>
-      </fieldset>
-      <%# if pet_type_cat && !pet_cat_dog %>
-      <fieldset class="my-4">
-        <p>Dog size (lbs)</p>
-        <div class="flex justify-between content-center">
-          <%= f.fields_for :dog_size do |dog_size| %>
-            <div>
-              <%= dog_size.label :s, "0-15" %>
-              <%= dog_size.check_box :s %>
-            </div>
-            <div>
-              <%= dog_size.label :m, "16-40" %>
-              <%= dog_size.check_box :m %>
-            </div>
-            <div>
-              <%= dog_size.label :l, "41-100" %>
-              <%= dog_size.check_box :l %>
-            </div>
-            <div>
-              <%= dog_size.label :xl, "100+" %>
-              <%= dog_size.check_box :xl %>
-            </div>
-          <% end %>
-        </div>
-      </fieldset>
-      <fieldset class="my-4">
-        <%= f.fields_for :price do |price| %>
-          <p class="block mb-2">Rate per day/night</p>
-          <div class="flex content-center">
-            <span class="range-low basis-10">$1</span>
-            <%= price.hidden_field :min, value: 1 %>
-            <div class="range-slider flex-1 mr-4 translate-y-1" style="margin-bottom: 0"></div>
-            <span class="range-high basis-10">$250</span>
-            <%= price.hidden_field :max, value: 250 %>
+            <%= pet_types.label :cat, "Cat" %>
+            <%= pet_types.check_box :cat, onchange: "this.form.requestSubmit()" %>
           </div>
         <% end %>
-      </fieldset>
-      <%= f.submit "Search" %>
-    </div>
-    <%= render partial: "filters_details", locals: {f: f} %>
-  <% end %>
-<script>
-    let slider = new RangeSlider('.range-slider', {
-      values: [1, 250],
-      min: 1,
-      max: 250,
-      pointRadius: 8
-    });
-    slider.onChange(values => {
-      const lowEle = document.querySelector(".range-low");
-      const highEle = document.querySelector(".range-high");
-      const lowInput = document.getElementById("filters_price_min");
-      const highInput = document.getElementById("filters_price_max");
-      lowEle.textContent = `$${values[0]}`;
-      highEle.textContent = `$${values[1]}`;
-      lowInput.value = values[0];
-      highInput.value = values[1];
-    });
-</script>
+      </div>
+    </fieldset>
+    <%# if pet_type_cat && !pet_cat_dog %>
+    <fieldset class="my-4">
+      <p>Dog size (lbs)</p>
+      <div class="flex justify-between content-center">
+        <%= f.fields_for :dog_size do |dog_size| %>
+          <div>
+            <%= dog_size.label :s, "0-15" %>
+            <%= dog_size.check_box :s, onchange: "this.form.requestSubmit()" %>
+          </div>
+          <div>
+            <%= dog_size.label :m, "16-40" %>
+            <%= dog_size.check_box :m, onchange: "this.form.requestSubmit()" %>
+          </div>
+          <div>
+            <%= dog_size.label :l, "41-100" %>
+            <%= dog_size.check_box :l, onchange: "this.form.requestSubmit()" %>
+          </div>
+          <div>
+            <%= dog_size.label :xl, "100+" %>
+            <%= dog_size.check_box :xl, onchange: "this.form.requestSubmit()" %>
+          </div>
+        <% end %>
+      </div>
+    </fieldset>
+    <fieldset class="my-4">
+      <%= f.fields_for :price do |price| %>
+        <p class="block mb-2">Rate per day/night</p>
+        <div class="flex content-center">
+          <span class="range-low basis-10">$1</span>
+          <%= price.hidden_field :min, value: 1 %>
+          <div class="range-slider flex-1 mr-4 translate-y-1" style="margin-bottom: 0"></div>
+          <span class="range-high basis-10">$250</span>
+          <%= price.hidden_field :max, value: 250 %>
+        </div>
+      <% end %>
+    </fieldset>
+  </div>
+  <%= render partial: "filters_details", locals: {f: f} %>
+<% end %>
