@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_15_130200) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_18_174648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -60,6 +60,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_130200) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sender_id"
+    t.uuid "receiver_id"
+    t.text "content"
+    t.uuid "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_messages_on_booking_id"
+  end
+
   create_table "services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id", null: false
     t.string "service_type"
@@ -95,5 +105,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_130200) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "services"
   add_foreign_key "bookings", "users"
+  add_foreign_key "messages", "bookings"
   add_foreign_key "services", "users", column: "member_id"
 end

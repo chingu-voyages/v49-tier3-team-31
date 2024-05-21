@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     get :profile, on: :collection
   end
 
-  resources :bookings, only: [:new, :create]
+  resources :bookings, only: [:new, :create, :show] do
+    post 'create_message', on: :member
+  end
   resources :services, only: [:index, :show, :new, :create]
   
   get 'home/index'

@@ -1,0 +1,38 @@
+<% @services.each do |service| %>
+  <%= link_to service_path(service['id']) do %>
+    <div class="service">
+      <h2><%= service['service_type'] %></h2>
+      <p><strong>Description:</strong> <%= service['description'] %></p>
+
+      <h3>Availability:</h3>
+      <ul>
+        <% service['availability'].each do |day, hours| %>
+          <li>
+            <strong><%= day %>:</strong> <%= hours['open'] %> - <%= hours['close'] %>
+          </li>
+        <% end %>
+      </ul>
+
+      <h3>Pricing:</h3>
+      <ul>
+        <% service['price'].each do |size, cost| %>
+          <li>
+            <strong><%= size.humanize %>:</strong> $<%= cost %>
+          </li>
+        <% end %>
+      </ul>
+
+      <h3>Size Range:</h3>
+      <ul>
+        <% service['size'].each do |size, range| %>
+          <li>
+            <strong><%= size.humanize %>:</strong> <%= range %>
+          </li>
+        <% end %>
+      </ul>
+
+      <p><strong>Member:</strong> <%= User.find(service['member_id']).first_name %> <%= User.find(service['member_id']).last_name %><!-- Assuming you have a name attribute in User model --></p>
+    </div>
+  <% end %>
+  <hr>
+<% end %>

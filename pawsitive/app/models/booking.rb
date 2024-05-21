@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :service
   belongs_to :user, foreign_key: :user_id
+  has_many :messages, dependent: :destroy
 
   validates :service_id, presence: true
   validates :num_of_pets, presence: true, numericality: { only_integer: true, greater_than: 0 }
