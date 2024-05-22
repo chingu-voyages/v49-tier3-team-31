@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     get :profile, on: :collection
-    get :update_profile, on: :collection
+   #get :update, on: :collection
+   #post 'users/update_profile', to: 'users#update_profile'
   end
 
   resources :bookings, only: [:new, :create]

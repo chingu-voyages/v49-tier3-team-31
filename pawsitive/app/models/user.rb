@@ -3,9 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many_attached :photos, service: :amazon, dependent: :destroy
   has_one_attached :avatar, service: :amazon, dependent: :destroy
+  has_one :account
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -27,7 +28,7 @@ class User < ApplicationRecord
 
   def add_default_avatar
     return if avatar.attached?
-    
+
     avatar.attach(
       io: File.open(
         Rails.root.join('app', 'assets', 'images', 'default_image.jpeg')
