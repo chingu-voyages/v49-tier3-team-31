@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_one_attached :avatar, service: :amazon, dependent: :destroy
   has_one :account
 
+  has_many :services, foreign_key: "member_id"
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :role, presence: true

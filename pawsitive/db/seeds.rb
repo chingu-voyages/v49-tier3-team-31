@@ -1,14 +1,4 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
-[
+test_users = [
   {
     first_name: "James",
     last_name: "Cameron",
@@ -89,8 +79,39 @@
     price: 10,
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
   }
-].each_with_index do |user, i|
-  User.find_or_create_by!(user) do |new_user|
+]
+
+def create_services(user, i)
+  boarding_prices = {
+    base_rate: (i + 1) * 5,
+    holiday_rate: (i + 1) * 7,
+    additional_pet: i + 1,
+    puppy_rate: (i + 1) * 6
+  }
+  day_care_prices = {
+    base_rate: (i + 1) * 5,
+    holiday_rate: (i + 1) * 8,
+    additional_pet: (i + 1) * 2,
+    puppy_rate: (i + 1) * 6
+  }
+  availability = i % 3 == 0 ? %w[Sunday Thursday Friday Saturday] : %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
+  sizes = i % 2 == 0 ? %w[s m l] : %w[s m l xl]
+  ["Dog Sitting", "Dog Boarding"].each do |service_type|
+    service = {
+      service_type: service_type,
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor.",
+      price: service_type == "Dog Boarding" ? boarding_prices : day_care_prices,
+      size: sizes,
+      availability: availability,
+      member_id: user.id
+    }
+    Service.find_or_create_by!(service)
+  end
+end
+
+test_users.each_with_index do |user_data, i|
+  user = User.find_or_create_by!(user_data) do |new_user|
     new_user.password = "randomuser#{i + 1}"
   end
+  create_services(user, i)
 end
