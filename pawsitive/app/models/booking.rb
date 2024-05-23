@@ -2,6 +2,8 @@ class Booking < ApplicationRecord
   belongs_to :service
   belongs_to :user, foreign_key: :user_id
   has_many :messages, dependent: :destroy
+  
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :service_id, presence: true
   validates :num_of_pets, presence: true, numericality: { only_integer: true, greater_than: 0 }
@@ -14,7 +16,13 @@ class Booking < ApplicationRecord
   validate :end_date_after_start_date
   validate :end_time_after_start_time
 
+  after_create :create_notification
+
   private
+
+  def create_notification
+    Notification.create(user: self.receiver, notifiable: self, read: false)
+  end
 
   def end_date_after_start_date
     return if end_date.blank? || start_date.blank?
