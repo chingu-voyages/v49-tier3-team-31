@@ -1,26 +1,54 @@
-<div class="booking-details p-6 bg-white rounded-lg shadow-md">
-  <h2 class="text-2xl font-bold text-gray-900 mb-4"><%= @booking.service.service_type %></h2>
-  <p class="text-gray-700 mt-4"><strong>Description:</strong> <%= @booking.service.description %></p>
-  <p class="text-gray-700 mt-4"><strong>Booking Dates:</strong> <%= @booking.start_date %> to <%= @booking.end_date %></p>
-  <p class="text-gray-700 mt-4"><strong>Number of Pets:</strong> <%= @booking.num_of_pets %></p>
-  <p class="text-gray-700 mt-4"><strong>Message:</strong> <%= @booking.message %></p>
-
-  <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Messages:</h3>
-  <div class="messages space-y-4">
-    <% @messages.each do |message| %>
-      <div class="message p-4 bg-gray-100 rounded-lg">
-        <strong class="text-gray-800"><%= message.sender.first_name %><%= message.sender.last_name %>:</strong>
-        <p class="text-gray-700"><%= message.content %></p>
-        <span class="text-xs text-gray-600"><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></span>
-      </div>
-    <% end %>
+<section class="flex flex-col justify-center items-center px-4">
+  <div class="p-6 bg-white rounded-lg shadow-md w-full">
+    <div class="px-4 sm:px-0">
+      <h3 class="text-xl font-semibold leading-7 text-gray-900">Booking Information</h3>
+      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Details and messages for this booking.</p>
+    </div>
+    
+    <div class="mt-6 border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Service Type</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @booking.service.service_type %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Description</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @booking.service.description %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Booking Dates</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @booking.start_date %> to <%= @booking.end_date %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Number of Pets</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @booking.num_of_pets %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Message</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @booking.message %></dd>
+        </div>
+      </dl>
+    </div>
   </div>
 
-  <%= form_with(model: [ @booking, @message ], url: create_message_booking_path(@booking), local: true, class: "mt-4 space-y-4") do |f| %>
-    <div class="flex flex-col">
-      <%= f.label :content, "New Message", class: "text-sm font-medium text-gray-700" %>
-      <%= f.text_area :content, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+  <div class="mt-8 p-6 bg-white rounded-lg shadow-md w-full">
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">Messages:</h3>
+    <div class="messages space-y-4">
+      <% @messages.each do |message| %>
+        <div class="message p-4 bg-gray-100 rounded-lg">
+          <strong class="text-gray-800"><%= message.sender.first_name %> <%= message.sender.last_name %>:</strong>
+          <p class="text-gray-700"><%= message.content %></p>
+          <span class="text-xs text-gray-600"><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+        </div>
+      <% end %>
     </div>
-    <%= f.submit "Send Message", class: "mt-2 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300" %>
-  <% end %>
-</div>
+
+    <%= form_with(model: [ @booking, @message ], url: create_message_booking_path(@booking), local: true, class: "mt-4 space-y-4") do |f| %>
+      <div class="flex flex-col">
+        <%= f.label :content, "New Message", class: "text-sm font-medium text-gray-700" %>
+        <%= f.text_area :content, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <%= f.submit "Reply", class: "mt-2 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300" %>
+    <% end %>
+  </div>
+</section>
