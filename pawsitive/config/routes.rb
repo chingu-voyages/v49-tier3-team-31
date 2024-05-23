@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     get :profile, on: :collection
+   #get :update, on: :collection
+   #post 'users/update_profile', to: 'users#update_profile'
   end
 
   resources :bookings, only: [:new, :create]
   resources :services, only: [:index, :show, :new, :create]
-  
+
   get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -68,6 +68,37 @@
         <%= f.number_field :price, in: 1..200, step: :any, class: input_classes %>
       </div>
 
+
+      <div class="mb-4">
+        <%= f.label :address, "Address", class: label_classes %>
+        <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "Address", class: input_classes %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :country, "Country", class: label_classes %>
+        <%= f.text_field :country, autofocus: true, autocomplete: "country", placeholder: "Country", class: input_classes %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :city, "City", class: label_classes %>
+        <%= f.text_field :city, autofocus: true, autocomplete: "city", placeholder: "City", class: input_classes %>
+      </div>
+
+       <div class="mb-4">
+        <%= f.label :state, "State_or_Province", class: label_classes %>
+        <%= f.text_field :state, autofocus: true, autocomplete: "state_or_province", placeholder: "state_or_province", class: input_classes %>
+      </div>
+
+       <div class="mb-4">
+        <%= f.label :zip_or_postcode, "Zip_or_Postcode", class: label_classes %>
+        <%= f.text_field :zip, autofocus: true, autocomplete: "zip_or_postcode", placeholder: "zip_or_postcode", class: input_classes %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :birthday, "Birthday", class: label_classes %>
+        <%= f.date_field :birthday, autofocus: true, autocomplete: "birthday", placeholder: "birthday", class: input_classes %>
+      </div>
+
       <div class="flex items-center justify-between content-end">
         <%= f.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white hover:cursor-pointer font-bold py-2 px-4 mr-6 rounded focus:outline-none focus:shadow-outline" %>
         <%= link_to "Back", :back, class: "font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline border border-gray-500" %>

@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many_attached :photos, service: :amazon, dependent: :destroy
   has_one_attached :avatar, service: :amazon, dependent: :destroy
 
@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :role, presence: true
+  validates :address, presence: true
   validates :bio, length: { maximum: 500 }
   enum role: { user: 0, member: 1 }
 
@@ -29,7 +30,7 @@ class User < ApplicationRecord
 
   def add_default_avatar
     return if avatar.attached?
-    
+
     avatar.attach(
       io: File.open(
         Rails.root.join('app', 'assets', 'images', 'default_image.jpeg')
