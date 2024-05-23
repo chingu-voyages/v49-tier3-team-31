@@ -1,0 +1,17 @@
+<section class="flex flex-col justify-center items-center">
+  <h1 class="text-2xl font-bold">Notifications</h1>
+  <p class="text-gray-500">You have <%= @notifications.count %> unread notifications</p>
+  
+  <ul class="mt-4">
+    <% @notifications.each do |notification| %>
+      <li class="mb-2">
+        <% if notification.notifiable_type == 'Message' %>
+          <%= link_to "New message from #{notification.notifiable.sender.first_name}", booking_message_path(notification.notifiable.booking, notification.notifiable), class: "text-blue-500", data: { action: "click->notification#markAsRead", notification_id: notification.id } %>
+        <% elsif notification.notifiable_type == 'Booking' %>
+          <%= link_to "New booking from #{notification.notifiable.user.first_name}", booking_path(notification.notifiable), class: "text-green-500", data: { action: "click->notification#markAsRead", notification_id: notification.id } %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
