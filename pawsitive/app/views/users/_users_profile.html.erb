@@ -1,0 +1,30 @@
+
+    <div class="box-content h-60 w-60 p-10 border-4 ml-96 font-bold underline decoration-solid"> Account Info
+        </br>
+        
+        <div role="status" class="space-y-8 md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center mt-4">
+            <div class="flex items-center justify-center w-28 h-28 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                    <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z"/>
+                </svg>
+            </div>
+            <div class="w-full underline decoration-solid">
+                <%= link_to "Update",   edit_user_registration_path %>
+            </div>
+        </div>
+
+    </div>
+            <div class="mt-10 mb-10 ml-96">
+                <h2 class="text-2xl font-semibold mb-2">Upload your Pet Photos </h2>
+                <form action="#" class="relative w-4/5 h-32 max-w-xs mb-10 bg-white bg-gray-100 rounded-lg shadow-inner">
+                    <input type="file" id="file-upload" class="hidden">
+                    <label for="file-upload" class="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer">
+                        <p class="z-10 text-xs font-light text-center text-gray-500">Drag & Drop your files here</p>
+                        <svg class="z-10 w-8 h-8 text-indigo-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                        </svg>
+                    </label>
+                </form>
+            </div>    
+
+    
