@@ -100,7 +100,7 @@ def create_services(user, i)
     service = {
       service_type: service_type,
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor.",
-      price: service_type == "boarding" ? boarding_prices : day_care_prices,
+      price: service_type == "Dog Boarding" ? boarding_prices : day_care_prices,
       size: sizes,
       availability: availability,
       member_id: user.id
