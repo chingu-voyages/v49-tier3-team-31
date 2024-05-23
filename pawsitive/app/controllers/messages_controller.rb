@@ -1,5 +1,10 @@
 class MessagesController < ApplicationController
   before_action :set_booking
+  before_action :set_message, only: [:show]
+
+  def show
+    redirect_to booking_path(@booking, anchor: "message-#{@message.id}")
+  end
 
   def create
     @message = @booking.messages.build(message_params)
@@ -14,6 +19,10 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def set_message
+    @message = Message.find(params[:id])
+  end
 
   def set_booking
     @booking = Booking.find(params[:booking_id])

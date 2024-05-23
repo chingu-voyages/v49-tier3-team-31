@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
     @booking.user_id = current_user.id
 
     if @booking.save
-      redirect_to user_path(current_user), notice: 'Booking was successfully created.'
+      redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
     else
       flash.now[:alert] = @booking.errors.full_messages.to_sentence
       render :new
@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @messages = @booking.messages.includes(:sender, :receiver)
+    @messages = @booking.messages.includes(:sender, :receiver).all
     @message = Message.new
   end
 
