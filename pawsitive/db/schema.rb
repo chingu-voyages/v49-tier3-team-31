@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_18_174648) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_204824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -70,6 +70,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_174648) do
     t.index ["booking_id"], name: "index_messages_on_booking_id"
   end
 
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "notifiable_type", null: false
+    t.uuid "notifiable_id", null: false
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id", null: false
     t.string "service_type"
@@ -106,5 +117,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_174648) do
   add_foreign_key "bookings", "services"
   add_foreign_key "bookings", "users"
   add_foreign_key "messages", "bookings"
+  add_foreign_key "notifications", "users"
   add_foreign_key "services", "users", column: "member_id"
 end
