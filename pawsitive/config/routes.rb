@@ -7,8 +7,20 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:new, :create, :show] do
     post 'create_message', on: :member
+    resources :messages, only: [:show]
   end
+
   resources :services, only: [:index, :show, :new, :create]
+
+  resources :notifications, only: [:index, :show] do
+    collection do
+      get :unread_count
+    end
+
+    member do
+      patch :mark_as_read
+    end
+  end
   
   get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
