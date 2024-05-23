@@ -1,4 +1,4 @@
-<% if current_user.role == 'user' %>
+
   <section class="w-full flex flex-col gap-4 overflow-hidden mt-5 px-8">
     <div class="sm:flex sm:w-[100%] xs:w-[90%] gap-4">
       <div class="flex flex-col gap-1 rounded self-start w-[100%] sm:w-[30%] p-4">
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="flex gap-2 mt-6">
-      <div class="service p-4 bg-white rounded-lg shadow-md border ">
+      <div class="service p-4 bg-white rounded-lg shadow-md border w-[30%] ">
         <h3 class="text-2xl font-semibold text-gray-900 mb-4">Services</h3>
         <div class="flex justify-between">
           <h2 class="text-2xl font-semibold text-gray-900"><%= @service.service_type %></h2>
@@ -77,4 +77,3 @@
       </div>
     </div>
   </section>
-<% end %>
