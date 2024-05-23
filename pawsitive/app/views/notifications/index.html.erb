@@ -1,6 +1,6 @@
 <section class="flex flex-col justify-center items-center">
   <h1 class="text-2xl font-bold">Notifications</h1>
-  <p class="text-gray-500">You have <%= @notifications.count %> unread notifications</p>
+  <p class="text-gray-500">You have <span id="unread-notification-count"><%= @unread_notifications_count %></span> unread notifications</p>
   
   <ul class="mt-4">
     <% @notifications.each do |notification| %>
@@ -10,8 +10,13 @@
         <% elsif notification.notifiable_type == 'Booking' %>
           <%= link_to "New booking from #{notification.notifiable.user.first_name}", booking_path(notification.notifiable), class: "text-green-500", data: { action: "click->notification#markAsRead", notification_id: notification.id } %>
         <% end %>
+        <%= form_with url: mark_as_read_notification_path(notification), method: :patch, local: true, data: { action: "ajax:success->notification#updateUnreadCount" } do %>
+          <%= hidden_field_tag :_method, 'patch' %>
+          <%= submit_tag 'Mark as read', class: "text-sm text-gray-500" %>
+        <% end %>
       </li>
     <% end %>
   </ul>
 </section>
+
 

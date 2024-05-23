@@ -23,19 +23,6 @@ export default class extends Controller {
   updateNotificationCount(count) {
     this.countTarget.textContent = count;
     this.countTarget.style.display = count > 0 ? "inline" : "none";
-  }
-
-  markAsRead(event) {
-    const notificationId = event.currentTarget.dataset.notificationId;
-
-    fetch(`/notifications/${notificationId}/mark_as_read`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
-      },
-    }).then(() => {
-      this.loadUnreadCount(); // Refresh unread count after marking as read
-    });
+    document.getElementById("unread-notification-count").textContent = count;
   }
 }
