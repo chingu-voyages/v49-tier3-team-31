@@ -10,4 +10,9 @@ class Service < ApplicationRecord
 
   scope :boarding, -> { where(service_type: "Dog Boarding") }
 
+  def self.filtered(filters)
+    return Service.where(service_type: "Dog Boarding") if filters.nil?
+    Service.where(service_type: filters[:service_type])
+      .where("price -> 'base_rate' BETWEEN ? AND ?", filters[:price][:min], filters[:price][:max])
+  end
 end
