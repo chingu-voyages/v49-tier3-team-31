@@ -32,6 +32,10 @@ gem "jbuilder"
 #mapkick gem added
 gem "mapkick-rb"
 
+#city state gem
+#gem 'city-state', '~> 1.1'
+gem 'country_state_select', '~> 3.2'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

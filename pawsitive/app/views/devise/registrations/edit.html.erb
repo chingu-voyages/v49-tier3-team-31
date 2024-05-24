@@ -76,7 +76,8 @@
 
       <div class="mb-4">
         <%= f.label :country, "Country", class: label_classes %>
-        <%= f.text_field :country, autofocus: true, autocomplete: "country", placeholder: "Country", class: input_classes %>
+        <%= f.input :country_field, collection: CountryStateSelect.countries_collection, autofocus: true, autocomplete: "country", placeholder: "Country", class: input_classes %>
+
       </div>
 
       <div class="mb-4">
@@ -115,4 +116,6 @@
       </div>
     </div>
   </div>
+
+  
 </div>
