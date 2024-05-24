@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_one_attached :avatar, service: :amazon, dependent: :destroy
 
   has_many :services, foreign_key: "member_id"
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
+  has_many :notifications, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
