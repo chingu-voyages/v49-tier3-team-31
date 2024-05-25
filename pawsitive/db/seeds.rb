@@ -83,29 +83,43 @@ test_users = [
 
 def create_services(user, i)
   boarding_prices = {
-    base_rate: (i + 1) * 5,
-    holiday_rate: (i + 1) * 7,
-    additional_pet: i + 1,
-    puppy_rate: (i + 1) * 6
+    "small_dog" => (i + 1) * 5,
+    "medium_dog" => (i + 1) * 7,
+    "large_dog" => (i + 1) * 9,
+    "giant_dog" => (i + 1) * 11
   }
   day_care_prices = {
-    base_rate: (i + 1) * 5,
-    holiday_rate: (i + 1) * 8,
-    additional_pet: (i + 1) * 2,
-    puppy_rate: (i + 1) * 6
+    "small_dog" => (i + 1) * 4,
+    "medium_dog" => (i + 1) * 6,
+    "large_dog" => (i + 1) * 8,
+    "giant_dog" => (i + 1) * 10
   }
-  availability = i % 3 == 0 ? %w[Sunday Thursday Friday Saturday] : %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
-  sizes = i % 2 == 0 ? %w[s m l] : %w[s m l xl]
-  ["Dog Sitting", "Dog Boarding"].each do |service_type|
+  
+  availability = {
+    "Monday" => { "open" => "08:00", "close" => "20:00" },
+    "Tuesday" => { "open" => "08:00", "close" => "20:00" },
+    "Wednesday" => { "open" => "08:00", "close" => "20:00" },
+    "Thursday" => { "open" => "08:00", "close" => "20:00" },
+    "Friday" => { "open" => "08:00", "close" => "20:00" }
+  }
+  
+  sizes = {
+    "small" => "0-15 lb",
+    "medium" => "16-40 lb",
+    "large" => "41-100 lb",
+    "giant" => "101+ lb"
+  }
+
+  ["Day Care", "Boarding", "Sitting"].each do |service_type|
     service = {
       service_type: service_type,
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor.",
-      price: service_type == "Dog Boarding" ? boarding_prices : day_care_prices,
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      price: service_type == "Boarding" ? boarding_prices : day_care_prices,
       size: sizes,
       availability: availability,
       member_id: user.id
     }
-    Service.find_or_create_by!(service)
+    Service.create!(service)
   end
 end
 
