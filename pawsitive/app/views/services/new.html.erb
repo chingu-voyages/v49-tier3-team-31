@@ -1,0 +1,82 @@
+<%= form_with model: @service, local: true, class: "max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md" do |f| %>
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Create a New Service</h2>
+
+  <!-- Hidden field for member_id -->
+  <%= f.hidden_field :member_id, value: current_user.id %>
+
+  <!-- Service Type Selection -->
+  <div class="mb-4">
+    <%= f.label :service_type, "Service Type", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.select :service_type, options_for_select(['Boarding', 'Walking', 'Day Care']), { prompt: 'Select Service Type' }, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+  </div>
+
+  <!-- Description Text Area -->
+  <div class="mb-4">
+    <%= f.label :description, "Description", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :description, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+  </div>
+
+  <!-- Availability Selection (Checkboxes) -->
+  <div class="mb-4">
+    <%= f.label :availability, "Availability", class: "block text-sm font-medium text-gray-700" %>
+    <% days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %>
+    <% days.each do |day| %>
+      <div class="flex items-center mb-2">
+        <%= label_tag "service[availability][#{day}][open]", "#{day} Open", class: "mr-2 text-sm" %>
+        <%= time_field_tag "service[availability][#{day}][open]", '08:00', class: "mr-4 mt-1 block w-1/4 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+        <%= label_tag "service[availability][#{day}][close]", "Close", class: "mr-2 text-sm" %>
+        <%= time_field_tag "service[availability][#{day}][close]", '20:00', class: "mt-1 block w-1/4 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- price Selection (Text Inputs for Different Sizes) -->
+  <div class="mb-4">
+    <%= f.label :price, "Price", class: "block text-sm font-medium text-gray-700" %>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= label_tag "service[price][small_dog]", "Small Dog", class: "text-sm" %>
+        <%= number_field_tag "service[price][small_dog]", '', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div>
+        <%= label_tag "service[price][medium_dog]", "Medium Dog", class: "text-sm" %>
+        <%= number_field_tag "service[price][medium_dog]", '', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div>
+        <%= label_tag "service[price][large_dog]", "Large Dog", class: "text-sm" %>
+        <%= number_field_tag "service[price][large_dog]", '', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div>
+        <%= label_tag "service[price][giant_dog]", "Giant Dog", class: "text-sm" %>
+        <%= number_field_tag "service[price][giant_dog]", '', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Size Range Selection (Dropdowns) -->
+  <div class="mb-4">
+    <%= f.label :size, "Size", class: "block text-sm font-medium text-gray-700" %>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= label_tag "service[size][small]", "Small", class: "text-sm" %>
+        <%= select_tag "service[size][small]", options_for_select(['0-15 lb', '16-30 lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div>
+        <%= label_tag "service[size][medium]", "Medium", class: "text-sm" %>
+        <%= select_tag "service[size][medium]", options_for_select(['16-40 lb', '41-60 lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div>
+        <%= label_tag "service[size][large]", "Large", class: "text-sm" %>
+        <%= select_tag "service[size][large]", options_for_select(['41-100 lb', '101-120 lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div>
+        <%= label_tag "service[size][giant]", "Giant", class: "text-sm" %>
+        <%= select_tag "service[size][giant]", options_for_select(['101+ lb', '121+ lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <%= f.submit "Create Service", class: "inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300" %>
+  </div>
+<% end %>
