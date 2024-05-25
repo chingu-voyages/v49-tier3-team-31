@@ -1,8 +1,6 @@
 class ServicesController < ApplicationController
-  before_action :authenticate_user!, only: [:show]
   before_action :set_service, only: [:show]
 
-  # GET /services
   def index
   end
 
