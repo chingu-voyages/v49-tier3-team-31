@@ -15,5 +15,6 @@ class Service < ApplicationRecord
     return Service.where(service_type: "Boarding") if filters.nil?
     Service.where(service_type: filters[:service_type])
       .where("price -> 'small_dog' BETWEEN ? AND ?", filters[:price][:min], filters[:price][:max])
+      .where("availability >= ?", filters[:date])
   end
 end
