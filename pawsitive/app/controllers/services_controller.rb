@@ -8,6 +8,7 @@ class ServicesController < ApplicationController
   def show
     @service = Service.find_by(id: params[:id])
     if @service
+      @availability = @service.availability.is_a?(String) ? JSON.parse(@service.availability) : @service.availability
       @member = User.find_by(id: @service.member_id)
     else
       redirect_to services_path, alert: @service.errors.full_messages
