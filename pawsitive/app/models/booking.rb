@@ -18,6 +18,14 @@ class Booking < ApplicationRecord
 
   after_create :create_notification
 
+  def receiver
+    service.member
+  end
+
+  def sender
+    user
+  end
+
   private
 
   def create_notification
