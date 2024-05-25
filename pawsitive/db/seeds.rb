@@ -119,7 +119,7 @@ def create_services(user, i)
       availability: availability,
       member_id: user.id
     }
-    Service.create!(service)
+    Service.find_or_create_by!(service)
   end
 end
 
