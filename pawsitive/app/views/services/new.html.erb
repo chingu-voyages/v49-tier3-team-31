@@ -7,7 +7,7 @@
   <!-- Service Type Selection -->
   <div class="mb-4">
     <%= f.label :service_type, "Service Type", class: "block text-sm font-medium text-gray-700" %>
-    <%= f.select :service_type, options_for_select(['Boarding', 'Walking', 'Day Care']), { prompt: 'Select Service Type' }, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+    <%= f.select :service_type, options_for_select(['Boarding', 'Sitting', 'Day Care']), { prompt: 'Select Service Type' }, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
   </div>
 
   <!-- Description Text Area -->
@@ -59,19 +59,19 @@
     <div class="grid grid-cols-2 gap-4">
       <div>
         <%= label_tag "service[size][small]", "Small", class: "text-sm" %>
-        <%= select_tag "service[size][small]", options_for_select(['0-15 lb', '16-30 lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+        <%= select_tag "service[size][small]", options_for_select(['0-15 lb']), prompt: 'select size' , class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
       </div>
       <div>
         <%= label_tag "service[size][medium]", "Medium", class: "text-sm" %>
-        <%= select_tag "service[size][medium]", options_for_select(['16-40 lb', '41-60 lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+        <%= select_tag "service[size][medium]", options_for_select(['16-30 lb']), prompt: 'select size', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
       </div>
       <div>
         <%= label_tag "service[size][large]", "Large", class: "text-sm" %>
-        <%= select_tag "service[size][large]", options_for_select(['41-100 lb', '101-120 lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+        <%= select_tag "service[size][large]", options_for_select(['41-100 lb']), prompt: 'select size', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
       </div>
       <div>
         <%= label_tag "service[size][giant]", "Giant", class: "text-sm" %>
-        <%= select_tag "service[size][giant]", options_for_select(['101+ lb', '121+ lb'], prompt: 'Select Size'), class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+        <%= select_tag "service[size][giant]", options_for_select(['101+ lb']), prompt: 'select size', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
       </div>
     </div>
   </div>
