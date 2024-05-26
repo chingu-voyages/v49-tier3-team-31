@@ -116,7 +116,9 @@ def create_services(user, i)
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       price: service_type == "Boarding" ? boarding_prices : day_care_prices,
       size: sizes,
-      member_id: user.id
+      member_id: user.id,
+      pet_number: i < 2 ? (i+1).to_s : "3+",
+      pet_types: i > 5 ? ["dog", "cat"] : ["dog"]
     )
   
     create_availabilities(service, availability)
@@ -130,7 +132,7 @@ def create_availabilities(service, availability)
     (Date.today..(Date.today + 30)).each do |date|
       next unless date.strftime('%A') == day
 
-      Availability.create!(
+      Availability.find_or_create_by!(
         service: service,
         date: date,
         start_time: start_time,
