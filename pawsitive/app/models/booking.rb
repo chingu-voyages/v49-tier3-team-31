@@ -17,11 +17,27 @@ class Booking < ApplicationRecord
   validate :end_time_after_start_time
 
   after_create :create_notification
+  after_create :update_availability
+
+  def receiver
+    service.member
+  end
+
+  def sender
+    user
+  end
 
   private
 
   def create_notification
     Notification.create(user: self.receiver, notifiable: self, read: false)
+  end
+
+  def update_availability
+    (start_date..end_date).each do |date|
+      availability = Availability.find_by(service: service, start_date: date)
+      availability.update(available: false) if availability
+    end
   end
 
   def end_date_after_start_date

@@ -4,10 +4,10 @@
   
   <ul role="list" class="divide-y divide-gray-100 w-full max-w-2xl">
     <% @notifications.each do |notification| %>
-      <li class="flex justify-between gap-x-6 py-5">
+      <li class="flex justify-between gap-x-6 py-5 border rounded-xl px-3">
         <div class="flex min-w-0 gap-x-4">
-            <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= notification.notifiable.sender.avatar %>" alt="Avatar">
-          <div class="min-w-0 flex-auto">
+          <%= image_tag(notification.notifiable.sender.avatar, class: "h-12 w-12 flex-none rounded-full bg-gray-50", alt:'') %>
+            <div class="min-w-0 flex-auto">
             <% if notification.notifiable_type == 'Message' %>
               <p class="text-sm font-semibold leading-6 text-gray-900">
                 <%= link_to "New message from #{notification.notifiable.sender.first_name}", booking_message_path(notification.notifiable.booking, notification.notifiable), 
