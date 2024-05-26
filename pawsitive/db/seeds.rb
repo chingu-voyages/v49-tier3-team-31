@@ -111,15 +111,33 @@ def create_services(user, i)
   }
 
   ["Day Care", "Boarding", "Sitting"].each do |service_type|
-    service = {
+    service = Service.find_or_create_by(
       service_type: service_type,
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       price: service_type == "Boarding" ? boarding_prices : day_care_prices,
       size: sizes,
-      availability: availability,
       member_id: user.id
-    }
-    Service.create!(service)
+    )
+  
+    create_availabilities(service, availability)
+  end
+end
+
+def create_availabilities(service, availability)
+  availability.each do |day, times|
+    start_time = Time.parse(times["open"])
+    end_time = Time.parse(times["close"])
+    (Date.today..(Date.today + 30)).each do |date|
+      next unless date.strftime('%A') == day
+
+      Availability.create!(
+        service: service,
+        date: date,
+        start_time: start_time,
+        end_time: end_time,
+        available: true
+      )
+    end
   end
 end
 

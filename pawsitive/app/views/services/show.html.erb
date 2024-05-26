@@ -45,13 +45,12 @@
           <button class="flex-1 rounded-full antialiased border capitalize" >See additional rates</button>
         </div>
       <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Availability:</h3>
-      <ul class="list-disc list-inside text-gray-700">
-        <% @service.availability.each do |day, hours| %>
-          <li class="ml-4">
-            <strong class="text-gray-800"><%= day %>:</strong> <%= hours['open'] %> - <%= hours['close'] %>
-          </li>
-        <% end %>
-      </ul>
+      <details>
+        <summary class="text-gray-800">View Availability</summary>
+        <ul class="list-disc list-inside text-gray-700">
+          <%= render "services/calender", availabilities: @availabilities %>
+        </ul>
+      </details>
       <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Pricing:</h3>
       <ul class="list-disc list-inside text-gray-700">
         <% JSON.parse(@service.price.to_s.gsub('=>', ':')).each do |size, cost| %>
