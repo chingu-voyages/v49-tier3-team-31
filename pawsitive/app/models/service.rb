@@ -35,7 +35,6 @@ class Service < ApplicationRecord
     array = []
     pet_types[:dog] == "1" && array << "dog"
     pet_types[:cat] == "1" && array << "cat"
-    p array
     return self.all if array.length.zero?
     self.where("pet_types @> ARRAY[?]::varchar[]", array)
   end
@@ -46,7 +45,5 @@ class Service < ApplicationRecord
       #.where("size -> 'small' ? '0-15 lb'")
       .where("size -> 'medium' ? '16-30 lb'")
       #.where("size -> 'medium' = '16-40 lb' AND '1' = ?", size[:m])
-      #.where("size -> 'large' = '41-100 lb' AND '1' = ?", size[:l])
-      #.where("size -> 'giant' = '101+ lb' AND '1' = ?", size[:xl])
   end
 end

@@ -23,7 +23,6 @@ class ServicesController < ApplicationController
     @service = Service.new(service_params.except(:availability))
     @service.price.each { |k, v| @service.price[k] = v.to_i }
     @service.pet_types = JSON.parse(@service.pet_types.gsub('=>', ':')).reduce([]) { |r, (k, v)| v.to_i.zero? ? r : r << k}
-    p @service
     if @service.save
       process_availability(@service, service_params[:availability])
       redirect_to @service, notice: 'Service was successfully created.'
