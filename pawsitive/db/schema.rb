@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_26_140556) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_26_233747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -72,9 +72,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_26_140556) do
   end
 
   create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "sender_id"
-    t.uuid "receiver_id"
-    t.text "content"
+    t.uuid "sender_id", null: false
+    t.uuid "receiver_id", null: false
+    t.text "content", null: false
     t.uuid "booking_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -100,6 +100,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_26_140556) do
     t.jsonb "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pet_number"
+    t.string "pet_types", default: [], array: true
     t.index ["member_id"], name: "index_services_on_member_id"
   end
 

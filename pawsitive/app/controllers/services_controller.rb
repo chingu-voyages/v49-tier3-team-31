@@ -21,6 +21,8 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.new(service_params.except(:availability))
+    @service.price.each { |k, v| @service.price[k] = v.to_i }
+    @service.pet_types = JSON.parse(@service.pet_types.gsub('=>', ':')).reduce([]) { |r, (k, v)| v.to_i.zero? ? r : r << k}
     if @service.save
       process_availability(@service, service_params[:availability])
       redirect_to @service, notice: 'Service was successfully created.'
@@ -38,7 +40,7 @@ class ServicesController < ApplicationController
   end
 
   def service_params
-    params.require(:service).permit(:member_id, :service_type, :description, availability: {}, price: {}, size: {})
+    params.require(:service).permit(:member_id, :service_type, :description, :pet_number, availability: {}, price: {}, size: {}, pet_types: {})
   end
 
     def process_availability(service, availability_params)

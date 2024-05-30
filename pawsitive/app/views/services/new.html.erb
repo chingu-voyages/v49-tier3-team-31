@@ -76,6 +76,40 @@
     </div>
   </div>
 
+  <div class="mb-4">
+    <p class="block text-sm font-medium text-gray-700">Number of pets acceptable</p>
+      <div class="grid grid-cols-3 gap-4 justify-items-center">
+        <div>
+          <%= f.label :pet_number_1, "1" %>
+          <%= f.radio_button :pet_number, "1", class: "border-gray-300" %>
+        </div>
+        <div>
+          <%= f.label :pet_number_2, "2" %>
+          <%= f.radio_button :pet_number, "2", class: "border-gray-300" %>
+        </div>
+        <div>
+          <%= f.label :pet_number_3, "3+" %>
+          <%= f.radio_button :pet_number, "3+", class: "border-gray-300" %>
+        </div>
+      </div>
+  </div>
+
+  <div class="mb-4">
+    <p class="block text-sm font-medium text-gray-700">Types of pets accepted</p>
+    <div class="grid grid-cols-2 gap-4 justify-items-center">
+        <%= f.fields_for :pet_types do |pet_types| %>
+          <div>
+            <%= pet_types.label :dog, "Dog" %>
+            <%= pet_types.check_box :dog, checked: true, class: "rounded border-gray-300" %>
+          </div>
+          <div>
+            <%= pet_types.label :cat, "Cat" %>
+            <%= pet_types.check_box :cat, class: "rounded border-gray-300" %>
+          </div>
+        <% end %>
+      </div>
+  </div>
+
   <div class="mt-6">
     <%= f.submit "Create Service", class: "inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300" %>
   </div>
