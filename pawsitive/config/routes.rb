@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: "users/registrations"
+  }
+
 
   resources :users, only: [] do
     get :profile, on: :collection
@@ -21,7 +25,7 @@ Rails.application.routes.draw do
       patch :mark_as_read
     end
   end
-  
+
   get 'home/index'
   get "up" => "rails/health#show", as: :rails_health_check
 

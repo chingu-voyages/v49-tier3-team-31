@@ -6,4 +6,13 @@ class UsersController < ApplicationController
   end
 
 
+  def new
+    @User = user.new user_params
+  end
+
+private
+  def user_params
+    params.require(:user).permit(:country, :state, :city, :address, :zip, :birthday )
+  end
+
 end

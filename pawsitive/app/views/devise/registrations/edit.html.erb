@@ -68,27 +68,28 @@
         <%= f.number_field :price, in: 1..200, step: :any, class: input_classes %>
       </div>
 
-
       <div class="mb-4">
         <%= f.label :address, "Address", class: label_classes %>
-        <%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "Address", class: input_classes %>
+        <%= f.text_field :address, class: input_classes %>
       </div>
 
       <div class="mb-4">
         <%= f.label :country, "Country", class: label_classes %>
-        <%= f.input :country_field, collection: CountryStateSelect.countries_collection, autofocus: true, autocomplete: "country", placeholder: "Country", class: input_classes %>
-
+        <%= f.select :country, @user.countries.invert , {include_blank: true}, {} %>
       </div>
 
-      <div class="mb-4">
-        <%= f.label :city, "City", class: label_classes %>
-        <%= f.text_field :city, autofocus: true, autocomplete: "city", placeholder: "City", class: input_classes %>
-      </div>
 
        <div class="mb-4">
-        <%= f.label :state, "State_or_Province", class: label_classes %>
-        <%= f.text_field :state, autofocus: true, autocomplete: "state_or_province", placeholder: "state_or_province", class: input_classes %>
+        <%= f.label :state, "State", class: label_classes %>
+        <%= f.select :state,  @user.states.values, {include_blank: true}, {} %>
       </div>
+
+      <%# <div class="mb-4">
+        <%= f.label :city, "City", class: label_classes %>
+        <%# <%= f.select :city, @user.cities, {include_blank: true}, {} %>
+      <%# </div>  %> 
+
+      
 
       <div class="mb-4">
         <%= f.label :zip_or_postcode, "Zip_or_Postcode", class: label_classes %>
