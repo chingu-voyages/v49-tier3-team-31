@@ -2,7 +2,7 @@
   <div class="bg-white px-4 pb-1 leading-8">
     <fieldset class="mb-4">
       <%= f.label :service_type, class: "block" %>
-      <%= f.select :service_type, ["Dog Boarding", "Dog Sitting"], {}, class: "w-full", onchange: "this.form.requestSubmit()" %>
+      <%= f.select :service_type, ["Boarding", "Day Care","Sitting"], {}, class: "w-full", onchange: "this.form.requestSubmit()" %>
     </fieldset>
     <fieldset class="my-4">
       <%= f.label :location, "Near" %>
@@ -31,7 +31,7 @@
         </div>
         <div>
           <%= f.label :pet_number_3, "3+" %>
-          <%= f.radio_button :pet_number, "3", onchange: "this.form.requestSubmit()" %>
+          <%= f.radio_button :pet_number, "3+", onchange: "this.form.requestSubmit()" %>
         </div>
       </div>
     </fieldset>
