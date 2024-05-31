@@ -72,24 +72,27 @@
         <%= f.label :address, "Address", class: label_classes %>
         <%= f.text_field :address, class: input_classes %>
       </div>
+      <%= turbo_frame_tag :cs_select do %>
+      <div data-controller="form-element">
+        <%= f.button "Validate", formaction: registration_path(resource_name), formmethod: :put, data: { form_element_target: "remoteBtn", turbo_frame: :cs_select } %>
+        
+        <div class="mb-4">
+          <%= f.label :country, "Country", class: label_classes %>
+            <%= f.select :country, @user.countries.invert , {include_blank: true}, { class: input_classes, data: {action: "change->form-element#autosubmit"}} %>
+        </div>
 
-      <div class="mb-4">
-        <%= f.label :country, "Country", class: label_classes %>
-        <%= f.select :country, @user.countries.invert , {include_blank: true}, {} %>
+
+        <div class="mb-4">
+          <%= f.label :state, "State", class: label_classes %>
+          <%= f.select :state,  @user.states.invert, {include_blank: true}, { data: {action: "change->form-element#autosubmit"}} %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :city, "City", class: label_classes %>
+          <%= f.select :city, @user.cities, {include_blank: true}, {} %>
+        </div>  
       </div>
-
-
-       <div class="mb-4">
-        <%= f.label :state, "State", class: label_classes %>
-        <%= f.select :state,  @user.states.values, {include_blank: true}, {} %>
-      </div>
-
-      <%# <div class="mb-4">
-        <%= f.label :city, "City", class: label_classes %>
-        <%# <%= f.select :city, @user.cities, {include_blank: true}, {} %>
-      <%# </div>  %> 
-
-      
+      <% end %>
 
       <div class="mb-4">
         <%= f.label :zip_or_postcode, "Zip_or_Postcode", class: label_classes %>
