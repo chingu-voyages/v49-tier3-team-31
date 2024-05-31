@@ -18,6 +18,12 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 500 }
   enum role: { user: 0, member: 1 }
 
+  validates :country, presence: true
+  validates :state, inclusion: { in: -> (record) { record.states}, allow_blank: true}
+  validates :state, presence: { if: -> (record) { record.states.present?}}
+  validates :city, inclusion: { in: -> (record) { record.cities}, allow_blank: true }
+  validates :city, presence: { if: -> (record) { record.cities.present?}}
+
   after_commit :add_default_avatar, on: %i[create update]
 
   def avatar_thumbnail
@@ -26,6 +32,18 @@ class User < ApplicationRecord
     else
       '/default_image.jpeg'
     end
+  end
+
+  def countries
+    CS.countries.with_indifferent_access
+  end
+
+  def states
+    CS.states(country).with_indifferent_access
+  end
+
+  def cities
+    CS.cities(state, country) || []
   end
 
   private
