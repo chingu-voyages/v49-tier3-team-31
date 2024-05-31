@@ -38,16 +38,13 @@ class User < ApplicationRecord
     CS.countries.with_indifferent_access
   end
 
-   def states
+  def states
     CS.states(country).with_indifferent_access
-   end
+  end
 
-   def cities
-     CS.cities(country) || []
-   end
-
-
-
+  def cities
+    CS.cities(state, country) || []
+  end
 
   private
 
