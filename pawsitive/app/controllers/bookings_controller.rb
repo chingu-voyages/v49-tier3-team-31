@@ -4,12 +4,14 @@ class BookingsController < ApplicationController
   before_action :set_services, only: [:new, :create]
 
   def new
+    @member = User.find_by(id: params[:user_id])
+    @services = @member.services
     @booking = Booking.new
   end
 
   def create
     @booking = Booking.new(booking_params)
-    @services = Service.all
+    @services = Service.find_by(id: params[:member_id])
     @booking.user_id = current_user.id
 
     if @booking.save
