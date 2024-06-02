@@ -1,4 +1,6 @@
 class NotificationMailer < ApplicationMailer
+  default from: 'lincolngibson7@gmail.com'
+  
   def notify_email(receiver, notification)
     @receiver = receiver
     @notification = notification

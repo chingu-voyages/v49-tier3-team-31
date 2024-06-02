@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       patch :mark_as_read
     end
   end
-  
+
   get 'home/index'
   get "up" => "rails/health#show", as: :rails_health_check
 
