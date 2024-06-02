@@ -28,6 +28,10 @@ class User < ApplicationRecord
     end
   end
 
+  def display_name
+    "#{self.first_name} #{self.last_name.first}."
+  end
+
   private
 
   def add_default_avatar

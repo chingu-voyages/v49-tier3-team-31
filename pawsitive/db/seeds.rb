@@ -142,7 +142,7 @@ def create_availabilities(service, availability)
 end
 
 test_users.each_with_index do |user_data, i|
-  user = User.find_or_create_by!(user_data) do |new_user|
+  user = User.find_or_create_by!({**user_data, latitude: (37.4241 - i / 100.0).round(4), longitude: (-122.1660 + i / 100.0).round(4) }) do |new_user|
     new_user.password = "randomuser#{i + 1}"
   end
   create_services(user, i)
