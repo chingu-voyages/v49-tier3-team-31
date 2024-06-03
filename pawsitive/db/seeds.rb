@@ -5,7 +5,10 @@ test_users = [
     role: 1,
     email: "james@cameron.com",
     price: 5,
-    bio: "I love dogs and making movie!"
+    bio: "I love dogs and making movie!",
+    country: "US",
+    state: "CA",
+    city: "Los Angeles"
   },
   {
     first_name: "Jane",
@@ -13,7 +16,10 @@ test_users = [
     role: 1,
     email: "jane@doe.com",
     price: 4,
-    bio: "All dogs are beautiful, but puppies are the best!"
+    bio: "All dogs are beautiful, but puppies are the best!",
+    country: "US",
+    state: "CA",
+    city: "San Francisco"
   },
   {
     first_name: "Dale",
@@ -21,7 +27,10 @@ test_users = [
     role: 1,
     email: "dale@henderson.com",
     price: 3,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "San Diego"
   },
   {
     first_name: "Julie",
@@ -29,7 +38,10 @@ test_users = [
     role: 1,
     email: "julie@cook.com",
     price: 4,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Sacramento"
   },
   {
     first_name: "Tony",
@@ -37,7 +49,10 @@ test_users = [
     role: 1,
     email: "tony@sutton.com",
     price: 5,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Santa Clara"
   },
   {
     first_name: "Jeff",
@@ -45,7 +60,10 @@ test_users = [
     role: 1,
     email: "jeff@vargas.com",
     price: 6,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Fresno"
   },
   {
     first_name: "Derek",
@@ -53,7 +71,10 @@ test_users = [
     role: 1,
     email: "derek@chambers.com",
     price: 7,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Bakersfield"
   },
   {
     first_name: "Danny",
@@ -61,7 +82,10 @@ test_users = [
     role: 1,
     email: "danny@holland.com",
     price: 8,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Oakland"
   },
   {
     first_name: "Nora",
@@ -69,7 +93,10 @@ test_users = [
     role: 1,
     email: "nora@hanson.com",
     price: 9,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Long Beach"
   },
   {
     first_name: "Hannah",
@@ -77,7 +104,10 @@ test_users = [
     role: 1,
     email: "hannah@porter.com",
     price: 10,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus."
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Irvine"
   }
 ]
 
