@@ -2,16 +2,23 @@
   <section class="basis-20 shrink-0 px-1">
     <%= render partial: "filters" %>
   </section>
-  <section class="bg-white flex-[4]">
-    <%= turbo_frame_tag "services" do %>
-      <div id="services">
-        <% @services.each_with_index do |service, i| %>
-          <%= render partial: "service_card", locals: {service: service, index: i + 1} %>
+  <%= turbo_frame_tag "services", class: "flex flex-1" do %>
+    <section class="bg-white flex-[4]">
+      <div id="services" class="w-full">
+        <% if @services.empty? %>
+          <div class="w-[50ch] p-4">
+            <p>No services found with that criteria :/</p>
+            <p>Please try another search</p>
+          </div>
+        <% else %>
+          <% @services.each_with_index do |service, i| %>
+            <%= render partial: "service_card", locals: {service: service, index: i + 1} %>
+          <% end %>
         <% end %>
       </div>
-    <% end %>
-  </section>
-  <section class="flex-[3] px-1">
-   <%= js_map [{latitude: 37.7829, longitude: -122.4190 }],id: "cities-map", height: "100%"%>
-  </section> 
+    </section>
+    <section class="flex-[3] px-1">
+        <%= js_map @locations, id: "cities-map", height: "100%"%>
+    </section> 
+  <% end %>
 </div>
