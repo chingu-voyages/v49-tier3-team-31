@@ -141,7 +141,7 @@ def create_services(user, i)
   }
 
   ["Day Care", "Boarding", "Sitting"].each do |service_type|
-    service = Service.find_or_create_by(
+    service = Service.find_or_create_by!(
       service_type: service_type,
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       price: service_type == "Boarding" ? boarding_prices : day_care_prices,
