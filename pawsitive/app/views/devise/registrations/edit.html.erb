@@ -78,18 +78,18 @@
         
         <div class="mb-4">
           <%= f.label :country, "Country", class: label_classes %>
-            <%= f.select :country, current_user.countries.invert , {include_blank: true}, { class: input_classes, data: {action: "change->form-element#autosubmit"}} %>
+            <%= f.select :country, user.countries.invert , {include_blank: true}, { class: input_classes, data: {action: "change->form-element#autosubmit"}} %>
         </div>
 
 
         <div class="mb-4">
           <%= f.label :state, "State", class: label_classes %>
-          <%= f.select :state, current_user.states.invert, {include_blank: true}, { data: {action: "change->form-element#autosubmit"}} %>
+          <%= f.select :state, user.states.invert, {include_blank: true}, { data: {action: "change->form-element#autosubmit"}} %>
         </div>
 
         <div class="mb-4">
           <%= f.label :city, "City", class: label_classes %>
-          <%= f.select :city, current_user.cities, {include_blank: true}, {} %>
+          <%= f.select :city, user.cities, {include_blank: true}, {} %>
         </div>  
       </div>
       <% end %>
