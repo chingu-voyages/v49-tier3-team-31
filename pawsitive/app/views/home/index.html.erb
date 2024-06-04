@@ -5,8 +5,8 @@
   <section class="bg-white flex-[4]">
     <%= turbo_frame_tag "services" do %>
       <div id="services">
-        <% @services.each_with_index do |service, i| %>
-          <%= render partial: "service_card", locals: {service: service, index: i + 1} %>
+        <% @services.each do |service| %>
+          <%= render partial: "service_card", locals: {service: service} %>
         <% end %>
       </div>
     <% end %>
