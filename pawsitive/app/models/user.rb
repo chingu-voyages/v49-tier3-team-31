@@ -18,8 +18,6 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 500 }
   enum role: { user: 0, member: 1 }
 
-  validates :country, inclusion: { in: -> (record) { record.countries}, allow_blank: true }
-  validates :country, presence: { if: -> (record) { record.countries.present?}}
   validates :state, inclusion: { in: -> (record) { record.states}, allow_blank: true}
   validates :state, presence: { if: -> (record) { record.states.present?}}
   validates :city, inclusion: { in: -> (record) { record.cities}, allow_blank: true }
