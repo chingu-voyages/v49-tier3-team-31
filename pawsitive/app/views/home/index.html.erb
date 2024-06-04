@@ -5,8 +5,12 @@
   <section class="bg-white flex-[4]">
     <%= turbo_frame_tag "services" do %>
       <div id="services">
-        <% @services.each do |service| %>
-          <%= render partial: "service_card", locals: {service: service} %>
+        <% if @services.empty? %>
+          <div class="text-center text-2xl text-gray-500 py-4">No services found</div>
+        <% else %>
+          <% @services.each do |service| %>
+            <%= render partial: "service_card", locals: {service: service} %>
+          <% end %>
         <% end %>
       </div>
     <% end %>
