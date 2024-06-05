@@ -5,14 +5,18 @@ class UsersController < ApplicationController
     current_user = User.find_by(id: params[:id])
   end
 
-
-  def new
-    @User = user.new user_params
+  def edit
+    @user = current_user
   end
 
-private
-  def user_params
-    params.require(:user).permit(:country, :state, :city, :address, :zip, :birthday )
-  end
+#   def new
+#     @User = user.new user_params
+#   end
+
+# private
+
+#   def user_params
+#     params.require(:user).permit(:country, :state, :city, :address, :zip, :birthday )
+#   end
 
 end
