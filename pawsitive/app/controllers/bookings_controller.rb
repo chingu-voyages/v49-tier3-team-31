@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @services = Service.find_by(id: params[:member_id])
-    @booking.user_id = current_user.id
+    @booking.user_id = @user.id
 
     if @booking.save
       redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
@@ -29,8 +29,8 @@ class BookingsController < ApplicationController
 
   def create_message
     @message = @booking.messages.build(message_params)
-    @message.sender = current_user
-    @message.receiver = @booking.user == current_user ? @booking.service.member : @booking.user
+    @message.sender = @user
+    @message.receiver = @booking.user == @user ? @booking.service.member : @booking.user
 
     if @message.save
       redirect_to booking_path(@booking), notice: 'Message sent successfully.'

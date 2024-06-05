@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def set_unread_notifications_count
     if user_signed_in?
-      @unread_notifications_count = current_user.notifications.unread.count
+      @unread_notifications_count = @user.notifications.unread.count
     end
   end
 end

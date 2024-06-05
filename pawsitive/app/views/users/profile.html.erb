@@ -1,5 +1,2 @@
-<% if current_user.role == 'member' %>
-    <%= render 'users/member_profile' %>
-  <% else %>
-    <%= render 'users/users_profile' %>
-<% end %>
+<% if @user.role == 'member' %> <%= render 'users/member_profile' %> <% else %>
+<%= render 'users/users_profile' %> <% end %>

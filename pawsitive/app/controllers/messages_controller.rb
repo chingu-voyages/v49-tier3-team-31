@@ -8,8 +8,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = @booking.messages.build(message_params)
-    @message.sender = current_user
-    @message.receiver = (@booking.user == current_user) ? @booking.service.member : @booking.user
+    @message.sender = @user
+    @message.receiver = (@booking.user == @user) ? @booking.service.member : @booking.user
 
     if @message.save
       redirect_to booking_path(@booking), notice: 'Message sent successfully.'

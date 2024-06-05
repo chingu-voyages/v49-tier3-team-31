@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :mark_as_read]
 
   def index
-    @notifications = current_user.notifications.order(created_at: :desc)
+    @notifications = @user.notifications.order(created_at: :desc)
   end
 
   def show
@@ -22,13 +22,13 @@ class NotificationsController < ApplicationController
   end
 
   def unread_count
-    count = current_user.notifications.unread.count
+    count = @user.notifications.unread.count
     render json: { count: count }
   end
 
   private
 
   def set_notification
-    @notification = current_user.notifications.find(params[:id])
+    @notification = @user.notifications.find(params[:id])
   end
 end
