@@ -28,12 +28,11 @@
         </ul>
       </div>
       <div class="hidden lg:flex lg:items-center gap-x-2">
-        <% if user_signed_in? %> <%= link_to
-        "Profile",profile_users_path(@user.id), class: "flex items-center
+        <% if user_signed_in? %> 
+        <%= link_to "Profile",profile_users_path(@user.id), class: "flex items-center
         justify-center rounded-md bg-[#4A3BFF] text-white px-6 py-2.5
         font-semibold hover:shadow-lg hover:drop-shadow transition
-        duration-200"%> <%= button_to "Logout", destroy_user_session_path,
-        class: "flex items-center justify-center rounded-md bg-[#4A3BFF]
+        duration-200"%> <%= button_to "Logout", destroy_user_session_path, class: "flex items-center justify-center rounded-md bg-[#4A3BFF]
         text-white px-6 py-2.5 font-semibold hover:shadow-lg hover:drop-shadow
         transition duration-200", method: :delete %>
         <p class="text-white"><%= @user.email %></p>
@@ -44,19 +43,19 @@
           <span
             id="notification-count"
             class="inline-flex items-center bg-red-500 rounded-md px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10 h-[14px] absolute"
-            data-notification-target="count"
-          >
-            <%= @unread_notifications_count if @unread_notifications_count.to_i
-            > 0 %>
+            data-notification-target="count">
+            <%= @unread_notifications_count if @unread_notifications_count.to_i > 0 %>
           </span>
-          <% end %> <% end %>
+          <% end %> 
+          <% end %>
         </div>
-        <% else %> <%= link_to "Sign up", new_user_registration_path, class:
-        "flex items-center text-black dark:text-white justify-center px-6 py-2.5
-        font-semibold" %> <%= link_to "Login", new_user_session_path, class:
+        <% else %>
+        <%= link_to "Sign up", new_user_registration_path, class: "flex items-center text-black dark:text-white justify-center px-6 py-2.5 font-semibold" %> 
+        <%= link_to "Login", new_user_session_path, class:
         "flex items-center justify-center rounded-md bg-[#4A3BFF] text-white
         px-6 py-2.5 font-semibold hover:shadow-lg hover:drop-shadow transition
-        duration-200" %> <% end %>
+        duration-200" %> 
+        <% end %>
       </div>
       <div class="flex items-center justify-center lg:hidden">
         <button class="focus:outline-none text-slate-200 dark:text-white">
