@@ -29,13 +29,13 @@
       </div>
       <div class="hidden lg:flex lg:items-center gap-x-2">
         <% if user_signed_in? %> 
-        <%= link_to "Profile",profile_users_path(@user.id), class: "flex items-center
+        <%= link_to "Profile",profile_users_path(@user), class: "flex items-center
         justify-center rounded-md bg-[#4A3BFF] text-white px-6 py-2.5
         font-semibold hover:shadow-lg hover:drop-shadow transition
         duration-200"%> <%= button_to "Logout", destroy_user_session_path, class: "flex items-center justify-center rounded-md bg-[#4A3BFF]
         text-white px-6 py-2.5 font-semibold hover:shadow-lg hover:drop-shadow
         transition duration-200", method: :delete %>
-        <p class="text-white"><%= @user.email %></p>
+        <!-- <p class="text-white"><%= @user.email %></p> -->
         <div class="nav-item ms-1" id="notifications">
           <%= link_to notifications_path, class: 'nav-link' do %>
             <i class="fa-regular fa-bell font-bold text-2xl text-white"></i><% if @unread_notifications_count.to_i > 0 %>
