@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_26_233747) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_144715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_26_233747) do
     t.string "phone_number"
     t.text "message", default: ""
     t.boolean "recieve_updates", default: false
+    t.string "status", default: "pending"
     t.index ["service_id"], name: "index_bookings_on_service_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
