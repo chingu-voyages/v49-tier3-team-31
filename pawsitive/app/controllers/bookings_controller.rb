@@ -36,7 +36,28 @@ class BookingsController < ApplicationController
       redirect_to booking_path(@booking), notice: 'Message sent successfully.'
     else
       @messages = @booking.messages.includes(:sender, :receiver)
-      render :show, alert: @message.errors.full_messages
+      flash[:alert] = @message.errors.full_messages.to_sentence
+      render :show
+    end
+  end
+  
+  def edit
+  end
+
+  def update
+    if @booking.update(booking_params)
+      redirect_to @booking, notice: 'Booking was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def update_status
+    if @booking.service.member_id == current_user.id
+      @booking.update(status: params[:status])
+      redirect_to booking_path(@booking), notice: 'Booking updated successfully.'
+    else
+      redirect_to booking_path(@booking), alert: 'You are not authorized to update this booking.'
     end
   end
 
@@ -57,5 +78,10 @@ class BookingsController < ApplicationController
   def message_params
     params.require(:message).permit(:content)
   end
-end
 
+  def authorize_user!
+    unless @booking.user_id == current_user.id
+      redirect_to root_path, alert: 'You are not authorized to edit this booking.'
+    end
+  end
+end
