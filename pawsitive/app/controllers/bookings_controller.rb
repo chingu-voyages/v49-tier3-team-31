@@ -1,7 +1,12 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_booking, only: [:show, :create_message]
-  before_action :set_services, only: [:new, :create]
+  before_action :set_booking, only: [:show, :edit, :update, :create_message, :update_status]
+  before_action :set_services, only: [:new, :create, :edit, :update]
+  before_action :authorize_user!, only: [:edit, :update]
+
+  def index
+    @bookings = current_user.bookings.includes(:service).all
+  end
 
   def new
     @member = User.find_by(id: params[:user_id])
@@ -72,7 +77,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:service_id, :num_of_pets, :start_date, :end_date, :start_time, :end_time, :phone_number, :message, :recieve_updates)
+    params.require(:booking).permit(:service_id, :num_of_pets, :start_date, :end_date, :start_time, :end_time, :phone_number, :message, :recieve_updates, :status)
   end
 
   def message_params
