@@ -79,3 +79,5 @@ end
 gem "aws-sdk-s3", require: false
 gem "devise"
 gem 'simple_calendar'
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
