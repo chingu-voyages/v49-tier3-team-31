@@ -2,6 +2,7 @@ class Service < ApplicationRecord
   belongs_to :member, class_name: 'User', foreign_key: 'member_id'
   has_many :bookings, dependent: :destroy
   has_many :availabilities, dependent: :destroy
+  has_many :reviews
 
   validates :service_type, presence: true, inclusion: { in: ["Day Care", "Boarding", "Sitting"] }
   validates :description, presence: true, length: { minimum: 10 , maximum: 500}
