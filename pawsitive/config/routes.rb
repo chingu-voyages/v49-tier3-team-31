@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:show]
   end
 
-  resources :services, only: [:index, :show, :new, :create]
+  resources :services, only: [:index, :show, :new, :create] do
+    resources :reviews
+  end
 
   resources :notifications, only: [:index, :show] do
     collection do
