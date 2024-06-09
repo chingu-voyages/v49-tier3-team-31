@@ -13,9 +13,9 @@ class Service < ApplicationRecord
 
   scope :boarding, -> { where(service_type: "Boarding") }
 
-  def self.filtered(filters)
-    return Service.where(service_type: "Boarding") if filters.nil?
-    Service.where(service_type: filters[:service_type])
+  def self.filtered(filters, lat = 37.3897, long = -122.0832)
+    return Service.where(service_type: "Boarding").where(member_id: User.near(lat, long).pluck(:id)) if filters.nil?
+    Service.where(service_type: filters[:service_type]).where(member_id: User.near(lat, long).pluck(:id))
       .where("price -> 'small_dog' BETWEEN ? AND ?", filters[:price][:min], filters[:price][:max])
       .where_pet_number(filters[:pet_number])
       .where_pet_types(filters[:pet_types])

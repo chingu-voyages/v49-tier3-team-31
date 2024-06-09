@@ -22,6 +22,11 @@ export default class extends Controller {
       this.highInput.value = values[1];
       this.lowInput.form.requestSubmit();
     });
+
+    const location = document.getElementsByName("filters[location]")[0];
+    location.addEventListener("keyup", e => {
+      if (e.key === "Enter") e.target.form.requestSubmit();
+    });
   }
 
   reset() {

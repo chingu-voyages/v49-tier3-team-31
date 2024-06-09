@@ -6,7 +6,7 @@
     </fieldset>
     <fieldset class="my-4">
       <%= f.label :location, "Near" %>
-      <%= f.text_field :location, placeholder: "Zip code or Address", onchange: "this.form.requestSubmit()" %>
+      <%= f.text_field :location, placeholder: "Zip code or Address", value: @zip %>
     </fieldset>
     <fieldset class="my-4">
       <p>Dates</p>
