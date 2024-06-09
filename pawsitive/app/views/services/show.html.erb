@@ -17,18 +17,26 @@
           <p class="bg-yellow-300 w-16 text-center text-xs capitalize">star sitter</p>
           <p class="text-sm capitalize"><%= @member.address %></p>
         </div>
-        <%= link_to new_booking_path(user_id: @member.id), class: "flex-1 text-center rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2 capitalize" do %>
-          Contact <%= @member.first_name %> <%= @member.last_name.slice(0,1) %>.
+        <% if current_user.id == @member.id %>
+          <button class="flex-1 text-center rounded-full bg-gray-400 text-gray-600 antialiased font-bold px-4 py-2 capitalize cursor-not-allowed" disabled>
+            Contact <%= @member.first_name %> <%= @member.last_name.slice(0,1) %>.
+          </button>
+        <% else %>
+          <%= link_to new_booking_path(user_id: @member.id), class: "flex-1 text-center rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2 capitalize" do %>
+            Contact <%= @member.first_name %> <%= @member.last_name.slice(0,1) %>.
+          <% end %>
         <% end %>
       </div>
       <div class="flex flex-col gap-1 rounded">
-      <% if @member.photos.attached? %>
-        <% @member.photos.each do |photo| %>
-          <%= image_tag(photo, class:"flex-1 rounded-xl lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] xs:w-[7rem] xs:h-[7rem] outline outline-2 outline-offset-2 outline-blue-500 ") %>
+        <% if @member.photos.attached? %>
+          <div class="flex flex-wrap gap-4">
+            <% @member.photos.each do |photo| %>
+              <%= image_tag(photo, class: "flex-1 rounded-xl lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] xs:w-[7rem] xs:h-[7rem] outline outline-2 outline-offset-2 outline-blue-500") %>
+            <% end %>
+          </div>
+        <% else %>
+          <p>No photos found.</p>
         <% end %>
-      <% else %>
-        <p>No photos attached.</p>
-      <% end %>
       </div>
     </div>
     <div class="flex gap-2 mt-6">
