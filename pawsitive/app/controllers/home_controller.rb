@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
     @services = Service.filtered params[:filters]
-    @locations = @services.map {|s| { latitude: s.member.latitude, longitude: s.member.longitude, tooltip: s.member.display_name, label: "$#{s.price["small_dog"]}" } }
+    @locations = @services.map {|s| { latitude: s.member.latitude, longitude: s.member.longitude, tooltip: s.member.display_name, label: "$#{s.price["small_dog"]}" } } 
+    @locations = [{latitude: 37.765, longitude: -122.424}] if @locations.empty?
   end
 
   private
