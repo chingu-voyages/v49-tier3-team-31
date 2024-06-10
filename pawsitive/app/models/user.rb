@@ -51,6 +51,12 @@ class User < ApplicationRecord
     CS.cities(state, country) || []
   end
 
+  def self.near(lat, long)
+    min_lat, max_lat = (lat - 0.1).round(4), (lat + 0.1).round(4)
+    min_long, max_long = (long - 0.1).round(4), (long + 0.1).round(4)
+    self.where(latitude: min_lat..max_lat).where(longitude: min_long..max_long)
+  end
+
   private
 
   def add_default_avatar
