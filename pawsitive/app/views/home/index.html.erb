@@ -1,4 +1,4 @@
-<div class="flex flex-1 bg-slate-200 pt-1">
+<div class="flex flex-1 bg-slate-200 pt-1 flex-col md:flex-row">
   <section class="basis-20 shrink-0 px-1">
     <%= render partial: "filters" %>
   </section>
@@ -17,7 +17,7 @@
         <% end %>
       </div>
     </section>
-    <section class="flex-[3] px-1">
+    <section class="flex-[3] px-1 hidden md:block">
         <%= js_map @locations, id: "cities-map", height: "100%"%>
     </section> 
   <% end %>
