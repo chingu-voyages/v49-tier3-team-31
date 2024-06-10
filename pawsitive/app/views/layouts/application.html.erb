@@ -12,13 +12,17 @@
   </head>
 
   <body>
-      <%= render "home/navbar" %>
+    <%= render "home/navbar" %>
+      <% if flash.any? %>
         <div class="w-full h-[30px]">
-        <% flash.each do |key, value| %>
-          <%= content_tag :div, value, class: "flash #{key == 'notice' ? 'text-center text-green-500' : 'text-center text-red-500'}" %>
-        <% end %>
-      </div>
-      <%= yield %> 
-      <%= render "home/footer" %>
+          <% flash.each do |key, value| %>
+            <%= content_tag :div, value, class: "flash #{key == 'notice' ? 'text-center text-green-500' : 'text-center text-red-500'}" %>
+          <% end %>
+        </div>
+      <% else %>
+        <div style="display: none;"></div>
+      <% end %>
+    <%= yield %> 
+    <%= render "home/footer" %>
   </body>
 </html>

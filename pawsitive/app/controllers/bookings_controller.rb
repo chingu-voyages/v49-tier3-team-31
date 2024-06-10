@@ -1,7 +1,12 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_booking, only: [:show, :create_message]
-  before_action :set_services, only: [:new, :create]
+  before_action :set_booking, only: [:show, :edit, :update, :create_message, :update_status]
+  before_action :set_services, only: [:new, :create, :edit, :update]
+  before_action :authorize_user!, only: [:edit, :update]
+
+  def index
+    @bookings = current_user.bookings.includes(:service).all
+  end
 
   def new
     @member = User.find_by(id: params[:user_id])
@@ -36,7 +41,28 @@ class BookingsController < ApplicationController
       redirect_to booking_path(@booking), notice: 'Message sent successfully.'
     else
       @messages = @booking.messages.includes(:sender, :receiver)
-      render :show, alert: @message.errors.full_messages
+      flash[:alert] = @message.errors.full_messages.to_sentence
+      render :show
+    end
+  end
+  
+  def edit
+  end
+
+  def update
+    if @booking.update(booking_params)
+      redirect_to @booking, notice: 'Booking was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def update_status
+    if @booking.service.member_id == current_user.id
+      @booking.update(status: params[:status])
+      redirect_to booking_path(@booking), notice: 'Booking updated successfully.'
+    else
+      redirect_to booking_path(@booking), alert: 'You are not authorized to update this booking.'
     end
   end
 
@@ -51,11 +77,16 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:service_id, :num_of_pets, :start_date, :end_date, :start_time, :end_time, :phone_number, :message, :recieve_updates)
+    params.require(:booking).permit(:service_id, :num_of_pets, :start_date, :end_date, :start_time, :end_time, :phone_number, :message, :recieve_updates, :status)
   end
 
   def message_params
     params.require(:message).permit(:content)
   end
-end
 
+  def authorize_user!
+    unless @booking.user_id == current_user.id
+      redirect_to root_path, alert: 'You are not authorized to edit this booking.'
+    end
+  end
+end
