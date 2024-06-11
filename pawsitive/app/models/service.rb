@@ -4,8 +4,8 @@ class Service < ApplicationRecord
   has_many :availabilities, dependent: :destroy
 
   validates :service_type, presence: true, inclusion: { in: ["Day Care", "Boarding", "Sitting"] }
-  validates :description, presence: true, length: { minimum: 10 , maximum: 500}
-  validates :price, presence: true
+  validates :description, presence: true, length: { minimum: 10 , maximum: 200}
+  validates :price, presence: true, numericality: { greater_than: 0 }
   validates :size, presence: true
   validates :member_id, presence: true
   validates :pet_number, presence: true, inclusion: { in: ["1", "2", "3+"] }
