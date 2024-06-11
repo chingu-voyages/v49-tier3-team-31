@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
 
   validates :service_id, presence: true
   validates :num_of_pets, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :phone_number, presence: false   # format: { with: /\A\d{10}\z/, message: "must be a valid 10-digit phone number" }
+  validates :phone_number, presence: true, format: { with: /\A\+?[0-9]{10,15}\z/, message: "must be a valid phone number with 10 to 15 digits" }
   validates :message, presence: true, length: { maximum: 500 }
   validates :recieve_updates, inclusion: { in: [true, false] }
   validates :start_date, :end_date, presence: true 
@@ -18,6 +18,7 @@ class Booking < ApplicationRecord
 
   after_create :create_notification
   after_create :update_availability
+  before_save :normalize_phone
 
   def receiver
     service.member
@@ -28,6 +29,10 @@ class Booking < ApplicationRecord
   end
 
   private
+
+  def normalize_phone
+    self.phone_number = Phonelib.parse(phone_number).full_e164.presence
+  end
 
   def create_notification
     notification = Notification.create(user: self.receiver, notifiable: self, read: false)
