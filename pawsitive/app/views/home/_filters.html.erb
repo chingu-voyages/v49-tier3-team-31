@@ -82,10 +82,13 @@
         <%= f.fields_for :price do |price| %>
           <p class="block mb-2">Rate per day/night</p>
           <div class="flex content-center">
-            <span class="range-low basis-10">$1</span>
+            <span class="basis-10" id="fromInput">$1</span>
             <%= price.hidden_field :min, value: 1 %>
-            <div class="range-slider flex-1 mr-4 translate-y-1" style="margin-bottom: 0"></div>
-            <span class="range-high basis-10">$250</span>
+            <div class="sliders_control relative min-h-50px flex-1 flex items-center">
+              <input id="fromSlider" type="range" value="1" min="1" max="250" class="range-slider-inputs h-0 z-10"/>
+              <input id="toSlider" type="range" value="250" min="1" max="250" class="range-slider-inputs h-1.5 rounded-md"/>
+            </div>
+            <span class="basis-10" id="toInput">$250</span>
             <%= price.hidden_field :max, value: 250 %>
           </div>
         <% end %>
