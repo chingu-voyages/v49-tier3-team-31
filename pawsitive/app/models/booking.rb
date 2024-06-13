@@ -7,17 +7,19 @@ class Booking < ApplicationRecord
 
   validates :service_id, presence: true
   validates :num_of_pets, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :phone_number, presence: false   # format: { with: /\A\d{10}\z/, message: "must be a valid 10-digit phone number" }
-  validates :message, presence: true, length: { maximum: 500 }
+  validates :phone_number, allow_blank: true, format: { with: /\A\+?[0-9]{10,15}\z/, message: "must be a valid phone number with 10 to 15 digits" }
+  validates :message, presence: true, length: { maximum: 200 }
   validates :recieve_updates, inclusion: { in: [true, false] }
   validates :start_date, :end_date, presence: true 
   validates :start_time, :end_time, presence: true
 
   validate :end_date_after_start_date
   validate :end_time_after_start_time
+  validate :start_date_must_be_in_future
 
   after_create :create_notification
   after_create :update_availability
+  before_save :normalize_phone
 
   def receiver
     service.member
@@ -28,6 +30,10 @@ class Booking < ApplicationRecord
   end
 
   private
+
+  def normalize_phone
+    self.phone_number = Phonelib.parse(phone_number).full_e164.presence
+  end
 
   def create_notification
     notification = Notification.create(user: self.receiver, notifiable: self, read: false)
@@ -52,6 +58,12 @@ class Booking < ApplicationRecord
     (booking_start >= availability_start && booking_start < availability_end) ||
       (booking_end > availability_start && booking_end <= availability_end) ||
       (booking_start <= availability_start && booking_end >= availability_end)
+  end
+
+  def start_date_must_be_in_future
+    if start_date.present? && start_date <= Date.today
+      errors.add(:start_date, "must be in the future")
+    end
   end
 
   def end_date_after_start_date

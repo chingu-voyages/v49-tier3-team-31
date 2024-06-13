@@ -1,4 +1,5 @@
 <section class="w-[50%] py-2 m-auto">
+  <% if @services.present? %>
   <%= form_with(model: @booking, url: bookings_path(user_id: params[:user_id]), local: true, class: 'space-y-2') do |f| %>
 
   <% if @member.present? %>
@@ -41,7 +42,7 @@
       <summary class="text-sm font-medium text-gray-700 text-center m-0">Add Pets</summary>
       <div class="space-y-1">
         <%= f.label :num_of_pets, "Add Pets", class: 'hidden block text-sm font-medium text-gray-700 text-center' %>
-        <%= f.number_field :num_of_pets, class: 'mt-1 block w-full py-2 px-3 border-none border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 0 %>
+        <%= f.number_field :num_of_pets, min: 0, class: 'mt-1 block w-full py-2 px-3 border-none border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 0 %>
       </div>
     </details>
 
@@ -68,5 +69,8 @@
     <div class="flex justify-center items-center">
       <%= f.submit "Submit", class: 'w-[25%] inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
     </div>
+  <% end %>
+  <% else %>
+    <p>No services found.</p>
   <% end %>
 </section>

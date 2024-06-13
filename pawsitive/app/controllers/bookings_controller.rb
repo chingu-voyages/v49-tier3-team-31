@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
     else
-      flash.now[:alert] = @booking.errors.full_messages.to_sentence
+      flash[:alert] = @booking.errors.full_messages.to_sentence
       render :new
     end
   end
