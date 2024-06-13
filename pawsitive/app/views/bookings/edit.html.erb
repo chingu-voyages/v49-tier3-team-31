@@ -1,8 +1,8 @@
-<section class="w-[50%] py-2 m-auto">
-  <%= form_for(@booking, html: { class: "space-y-2" }) do |f| %>
+<section class="w-full md:w-1/2 py-2 px-4 md:px-8 mx-auto">
+  <%= form_for(@booking, html: { class: "space-y-4" }) do |f| %>
     <% if @booking.errors.any? %>
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-      <strong class="font-bold"><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</strong>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold"><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</strong>
         <ul class="mt-3 list-disc list-inside text-sm text-red-600">
           <% @booking.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -10,6 +10,10 @@
         </ul>
       </div>
     <% end %>
+
+    <h2 class="text-center font-semibold text-xl">
+      Edit Booking
+    </h2>
 
     <div class="mb-4">
       <%= f.label :service_id, class: "block text-gray-700 text-sm font-bold mb-2" %>
@@ -60,5 +64,7 @@
       <%= f.submit "Update Booking", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
     </div>
   <% end %>
-  <%= link_to "Back", booking_path(@booking.id), class: "text-blue text-sm" %>
+  <div class="mt-4 text-center">
+    <%= link_to "Back", booking_path(@booking.id), class: "text-blue-500 hover:text-blue-700 text-sm" %>
+  </div>
 </section>

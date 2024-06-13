@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center sm:px-6 sm:py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'bg-transparent shadow-2xl rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
-      <h2 class="text-center">Edit <%= resource_name.to_s.humanize %></h2>
+      <h2 class="text-center text-2xl">Edit <%= resource_name.to_s.humanize %></h2>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <%
@@ -81,7 +81,6 @@
             <%= f.select :country, @user.countries.invert , {include_blank: true}, { class: input_classes, data: {action: "change->form-element#autosubmit"}} %>
         </div>
 
-
         <div class="mb-4">
           <%= f.label :state, "State", class: label_classes %>
           <%= f.select :state,  @user.states.invert, {include_blank: true}, { data: {action: "change->form-element#autosubmit"}} %>
@@ -115,11 +114,9 @@
     <div class="bg-transparent shadow-2xl rounded px-8 pt-6 pb-8 mb-4 w-full">
       <h3 class="text-center">Cancel my account</h3>
 
-      <div class="mb-4">
+      <div class="mb-4 flex flex-col justify-center items-center">
         Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
       </div>
     </div>
   </div>
-
-  
 </div>

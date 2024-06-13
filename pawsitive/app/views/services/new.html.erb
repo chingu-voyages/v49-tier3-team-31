@@ -13,7 +13,7 @@
   <!-- Description Text Area -->
   <div class="mb-4">
     <%= f.label :description, "Description", class: "block text-sm font-medium text-gray-700" %>
-    <%= f.text_area :description, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+    <%= f.text_area :description, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
   </div>
 
   <!-- Availability Selection (Checkboxes) -->
@@ -21,38 +21,38 @@
     <%= f.label :availability, "Availability", class: "block text-sm font-medium text-gray-700" %>
     <% days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %>
     <% days.each do |day| %>
-      <div class="flex justify-between items-center mb-2 gap-2">
+      <div class="flex flex-col sm:flex-row justify-between items-center mb-2 gap-2">
         <div class="w-full">
-          <%= label_tag "service[availability][#{day}][open]", "#{day} open", class: "text-sm" %>
+          <%= label_tag "service[availability][#{day}][open]", "#{day} Open", class: "text-sm" %>
           <%= time_field_tag "service[availability][#{day}][open]", '08:00', class: "mr-4 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
         </div>
         <div class="w-full">
-          <%= label_tag "service[availability][#{day}][close]", " close", class: "text-sm" %>
+          <%= label_tag "service[availability][#{day}][close]", "Close", class: "text-sm" %>
           <%= time_field_tag "service[availability][#{day}][close]", '20:00', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
         </div>
       </div>
     <% end %>
   </div>
 
-  <!-- price Selection (Text Inputs for Different Sizes) -->
+  <!-- Price Selection (Text Inputs for Different Sizes) -->
   <div class="mb-4">
     <%= f.label :price, "Price", class: "block text-sm font-medium text-gray-700" %>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
         <%= label_tag "service[price][small_dog]", "Small Dog", class: "text-sm" %>
-        <%= number_field_tag "service[price][small_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: 0 %>
+        <%= number_field_tag "service[price][small_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: "0" %>
       </div>
       <div>
         <%= label_tag "service[price][medium_dog]", "Medium Dog", class: "text-sm" %>
-        <%= number_field_tag "service[price][medium_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: 0 %>
+        <%= number_field_tag "service[price][medium_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: "0" %>
       </div>
       <div>
         <%= label_tag "service[price][large_dog]", "Large Dog", class: "text-sm" %>
-        <%= number_field_tag "service[price][large_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: 0 %>
+        <%= number_field_tag "service[price][large_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: "0" %>
       </div>
       <div>
         <%= label_tag "service[price][giant_dog]", "Giant Dog", class: "text-sm" %>
-        <%= number_field_tag "service[price][giant_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: 0 %>
+        <%= number_field_tag "service[price][giant_dog]", 0, min: 0, step: 1, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: "0" %>
       </div>
     </div>
   </div>
@@ -60,10 +60,10 @@
   <!-- Size Range Selection (Dropdowns) -->
   <div class="mb-4">
     <%= f.label :size, "Size", class: "block text-sm font-medium text-gray-700" %>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
         <%= label_tag "service[size][small]", "Small", class: "text-sm" %>
-        <%= select_tag "service[size][small]", options_for_select(['0-15 lb']), prompt: 'select size' , class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+        <%= select_tag "service[size][small]", options_for_select(['0-15 lb']), prompt: 'Select Size', class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
       </div>
       <div>
         <%= label_tag "service[size][medium]", "Medium", class: "text-sm" %>
@@ -80,41 +80,44 @@
     </div>
   </div>
 
+  <!-- Number of Pets Acceptable (Radio Buttons) -->
   <div class="mb-4">
-    <p class="block text-sm font-medium text-gray-700">Number of pets acceptable</p>
-      <div class="grid grid-cols-3 gap-4 justify-items-center">
-        <div>
-          <%= f.label :pet_number_1, "1" %>
-          <%= f.radio_button :pet_number, "1", class: "border-gray-300" %>
-        </div>
-        <div>
-          <%= f.label :pet_number_2, "2" %>
-          <%= f.radio_button :pet_number, "2", class: "border-gray-300" %>
-        </div>
-        <div>
-          <%= f.label :pet_number_3, "3+" %>
-          <%= f.radio_button :pet_number, "3+", class: "border-gray-300" %>
-        </div>
+    <p class="block text-sm font-medium text-gray-700">Number of Pets Acceptable</p>
+    <div class="grid grid-cols-3 gap-4">
+      <div>
+        <%= f.label :pet_number_1, "1", class: "text-sm" %>
+        <%= f.radio_button :pet_number, "1", class: "border-gray-300 mt-1" %>
       </div>
+      <div>
+        <%= f.label :pet_number_2, "2", class: "text-sm" %>
+        <%= f.radio_button :pet_number, "2", class: "border-gray-300 mt-1" %>
+      </div>
+      <div>
+        <%= f.label :pet_number_3, "3+", class: "text-sm" %>
+        <%= f.radio_button :pet_number, "3+", class: "border-gray-300 mt-1" %>
+      </div>
+    </div>
   </div>
 
+  <!-- Types of Pets Accepted (Checkboxes) -->
   <div class="mb-4">
     <p class="block text-sm font-medium text-gray-700">Types of pets accepted</p>
     <div class="grid grid-cols-2 gap-4 justify-items-center">
         <%= f.fields_for :pet_types do |pet_types| %>
           <div>
-            <%= pet_types.label :dog, "Dog" %>
-            <%= pet_types.check_box :dog, checked: true, class: "rounded border-gray-300" %>
+            <%= pet_types.label :dog, "Dog", class: "text-sm" %>
+            <%= pet_types.check_box :dog, checked: true, class: "rounded border-gray-300 mt-1" %>
           </div>
           <div>
-            <%= pet_types.label :cat, "Cat" %>
-            <%= pet_types.check_box :cat, class: "rounded border-gray-300" %>
+            <%= pet_types.label :cat, "Cat", class: "text-sm" %>
+            <%= pet_types.check_box :cat, class: "rounded border-gray-300 mt-1" %>
           </div>
         <% end %>
       </div>
+    </div>
   </div>
 
-  <div class="mt-6">
+  <div class="mt-6 text-center">
     <%= f.submit "Create Service", class: "inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300" %>
   </div>
 <% end %>
