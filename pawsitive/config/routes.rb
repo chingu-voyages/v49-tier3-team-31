@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :users, only: [] do
     get :profile, on: :collection
   end
 
-  resources :bookings, only: [:new, :create, :show] do
+  resources :bookings, only: [:new, :create, :show, :edit, :index] do
     post 'create_message', on: :member
+    patch 'update_status', on: :member
     resources :messages, only: [:show]
   end
+
+  resources :services, only: [:index, :show, :new, :create]
+
 
   resources :services, only: [:index, :show, :new, :create] do
     resources :reviews, only: [:new, :create, :edit]

@@ -1,26 +1,25 @@
-<section class="flex flex-col justify-center items-center">
-  <h1 class="text-2xl font-bold mb-4">Notifications</h1>
-  <p class="text-gray-500 mb-4">You have <span id="unread-notification-count"><%= @unread_notifications_count %></span> unread notifications</p>
-  
+<section class="flex flex-col justify-normal items-center min-h-screen p-4 bg-gray-50">
+  <h1 class="text-2xl font-bold my-4 text-center">Notifications</h1>
+  <p class="text-gray-500 mb-4 text-center">You have <span id="unread-notification-count"><%= @unread_notifications_count %></span> unread notifications</p>
   <ul role="list" class="divide-y divide-gray-100 w-full max-w-2xl">
     <% @notifications.each do |notification| %>
-      <li class="flex justify-between gap-x-6 py-5 border rounded-xl px-3">
-        <div class="flex min-w-0 gap-x-4">
+      <li class="flex flex-col sm:flex-row justify-between gap-x-6 py-5 border rounded-xl px-3 bg-white shadow-sm">
+        <div class="flex items-center gap-x-4">
           <% if notification.notifiable.sender.avatar.attached? %>
-            <%= image_tag(notification.notifiable.sender.avatar, class: "h-12 w-12 flex-none rounded-full bg-gray-50", alt:'avatar') %>
+            <%= image_tag(notification.notifiable.sender.avatar, class: "h-12 w-12 flex-none rounded-full bg-gray-50", alt: 'avatar') %>
           <% end %>
-            <div class="min-w-0 flex-auto">
+          <div class="min-w-0 flex-auto">
             <% if notification.notifiable_type == 'Message' %>
               <p class="text-sm font-semibold leading-6 text-gray-900">
                 <%= link_to "New message from #{notification.notifiable.sender.first_name}", booking_message_path(notification.notifiable.booking, notification.notifiable), 
-                  class: "text-blue-500", data: { action: "click->notification#markAsRead", notification_id: notification.id } %>
+                  class: "text-blue-500 hover:underline", data: { action: "click->notification#markAsRead", notification_id: notification.id } %>
               </p>
               <p class="mt-1 truncate text-xs leading-5 text-gray-500">
                 <%= notification.notifiable.sender.email %>
               </p>
             <% elsif notification.notifiable_type == 'Booking' %>
               <p class="text-sm font-semibold leading-6 text-gray-900">
-                <%= link_to "New booking from #{notification.notifiable.user.first_name}", booking_path(notification.notifiable), class: "text-green-500", 
+                <%= link_to "New booking from #{notification.notifiable.user.first_name}", booking_path(notification.notifiable), class: "text-green-500 hover:underline", 
                   data: { action: "click->notification#markAsRead", notification_id: notification.id } %>
               </p>
               <p class="mt-1 truncate text-xs leading-5 text-gray-500">
@@ -29,16 +28,17 @@
             <% end %>
           </div>
         </div>
-        <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <div class="mt-4 sm:mt-0 sm:ml-4 flex sm:flex-col sm:items-end">
           <%= form_with url: mark_as_read_notification_path(notification), method: :patch, local: true, data: { action: "ajax:success->notification#updateUnreadCount" } do %>
             <%= hidden_field_tag :_method, 'patch' %>
-            <%= submit_tag 'Mark as read', class: "text-sm text-gray-500 hover:cursor-pointer" %>
+            <%= submit_tag 'Mark as read', class: "text-sm text-gray-500 hover:text-gray-700 hover:cursor-pointer transition duration-300" %>
           <% end %>
         </div>
       </li>
     <% end %>
   </ul>
 </section>
+
 
 
 

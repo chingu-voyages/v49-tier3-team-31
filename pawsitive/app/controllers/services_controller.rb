@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :show]
 
   def index
   end

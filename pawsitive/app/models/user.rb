@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
   has_many :notifications, dependent: :destroy
   has_many :reviews
+  has_many :bookings
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -49,6 +50,12 @@ class User < ApplicationRecord
 
   def cities
     CS.cities(state, country) || []
+  end
+
+  def self.near(lat, long)
+    min_lat, max_lat = (lat - 0.1).round(4), (lat + 0.1).round(4)
+    min_long, max_long = (long - 0.1).round(4), (long + 0.1).round(4)
+    self.where(latitude: min_lat..max_lat).where(longitude: min_long..max_long)
   end
 
   private

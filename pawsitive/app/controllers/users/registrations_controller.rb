@@ -10,24 +10,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
+  def create
+    super do |user|
+      location = get_user_location
+      user.longitude = location["longitude"]
+      user.latitude = location["latitude"]
+      user.zip = location["postal"]
+      user.save
+    end
+  end
+
+  # GET /resource/edit
+  # def edit
   #   super
   # end
-
-
-  #GET /resource/edit
-  # def edit
-  #   @country = CS.countries.invert
-  #   @states = CS.states(:country).keys || []
-  #   @cities = CS.cities(:country, :state) || []
-  # end
-
-  # def countries
-  #   @country = CS.countries.invert
-
-  # end
-
-
 
   # PUT /resource
   # def update
@@ -69,4 +65,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def get_user_location
+    ip_address = Rails.env.production? ? request.remote_ip : "66.249.79.78"
+    location = Net::HTTP.get(URI("https://ipapi.co/#{ip_address}/json/"))
+    JSON.parse(location)
+  end
 end

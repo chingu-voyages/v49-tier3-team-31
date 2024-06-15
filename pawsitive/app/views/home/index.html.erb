@@ -1,4 +1,4 @@
-<div class="flex flex-1 bg-slate-200 pt-1">
+<div class="flex flex-1 bg-slate-200 pt-1 flex-col md:flex-row">
   <section class="basis-20 shrink-0 px-1">
     <%= render partial: "filters" %>
   </section>
@@ -6,9 +6,9 @@
     <section class="bg-white flex-[4]">
       <div id="services" class="w-full">
         <% if @services.empty? %>
-          <div class="w-[50ch] p-4">
-            <p>No services found with that criteria :/</p>
-            <p>Please try another search</p>
+          <div class="px-8 ms-auto me-auto pt-16 grid text-center">
+            <p class="font-semibold text-xl mb-8">We couldn't find any sitters that matched your criteria.</p>
+            <p>Try changing your search criteria or updating your location.</p>
           </div>
         <% else %>
           <% @services.each_with_index do |service, i| %>
@@ -17,7 +17,7 @@
         <% end %>
       </div>
     </section>
-    <section class="flex-[3] px-1">
+    <section class="flex-[3] px-1 hidden md:block">
         <%= js_map @locations, id: "cities-map", height: "100%"%>
     </section> 
   <% end %>

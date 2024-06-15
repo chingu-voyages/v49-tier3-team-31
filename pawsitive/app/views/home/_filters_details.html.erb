@@ -1,8 +1,8 @@
-<div class="px-4 mt-4 leading-9">
+<div class="px-4 mt-4 pt-4 pb-2 leading-9 bg-slate-200 -mx-4">
   <%= f.fields_for :filters do |filters| %>
     <div class="flex justify-between">
       <span>Filters</span>
-      <button type="reset" class="text-blue-700 font-semibold" data-controller="filters" data-action="click->filters#reset">Reset all</button>
+      <button type="reset" class="text-blue-700 font-semibold" data-controller="slider" data-action="click->slider#reset">Reset all</button>
     </div>
     <fieldset class="my-4">
       <%= filters.fields_for :housing_conditions do |housing_conditions| %>
@@ -101,4 +101,5 @@
       <% end %>
     </fieldset>
   <% end %>
+  <button class="block sm:hidden btn-primary ms-auto me-auto" data-action="click->filters#toggle">Less filters</button>
 </div>

@@ -1,10 +1,11 @@
-<section class="flex flex-col justify-center items-center px-4">
-  <div class="p-6 bg-white rounded-lg shadow-md w-full">
-    <div class="px-4 sm:px-0">
+<section class="flex flex-col justify-center items-center px-4 space-y-8">
+  <!-- Booking Information Section -->
+  <div class="p-6 bg-white rounded-lg shadow-md w-full max-w-4xl">
+    <div class="px-2 sm:px-0 flex flex-col items-center justify-center gap-2">
       <h3 class="text-xl font-semibold leading-7 text-gray-900">Booking Information</h3>
-      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Details and messages for this booking.</p>
+      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500 text-center">Details and messages for this booking.</p>
     </div>
-    
+
     <div class="mt-6 border-t border-gray-100">
       <dl class="divide-y divide-gray-100">
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -27,11 +28,29 @@
           <dt class="text-sm font-medium leading-6 text-gray-900">Message</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @booking.message %></dd>
         </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Status</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @booking.status %></dd>
+        </div>
       </dl>
     </div>
+
+    <% if current_user.id == @booking.user_id %>
+      <%= link_to 'Edit', edit_booking_path(@booking), class: "text-blue-500 hover:text-blue-700 mt-4 inline-block" %>
+    <% elsif current_user.id == @booking.service.member_id %>
+      <% if @booking.status == 'pending' %>
+        <div class="flex gap-2 justify-center mt-4">
+          <%= button_to 'Accept', update_status_booking_path(@booking, status: 'accepted'), method: :patch, class: "bg-green-500 text-white py-2 px-4 rounded" %>
+          <%= button_to 'Decline', update_status_booking_path(@booking, status: 'declined'), method: :patch, class: "bg-red-500 text-white py-2 px-4 rounded ml-2" %>
+        </div>
+      <% else %>
+        <p class="text-gray-700 mt-4">Booking has been <%= @booking.status %>.</p>
+      <% end %>
+    <% end %>
   </div>
 
-  <div class="mt-8 p-6 bg-white rounded-lg shadow-md w-full">
+  <!-- Messages Section -->
+  <div class="mt-8 p-6 bg-white rounded-lg shadow-md w-full max-w-4xl">
     <h3 class="text-xl font-semibold text-gray-800 mb-2">Messages:</h3>
     <div class="messages space-y-4">
       <% @messages.each do |message| %>
