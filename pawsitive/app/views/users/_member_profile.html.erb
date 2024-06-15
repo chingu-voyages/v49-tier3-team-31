@@ -1,65 +1,64 @@
-<section class="w-full flex flex-col justify-start overflow-y-scroll pt-5 px-4 bg-slate-300 h-[100vh]">
-  <div class="sm:flex sm:w-[100%] gap-2">
-    <div class="flex justify-between w-[100%] flex-col gap-2 sm:items-center h-full md:flex-row">
-      <div class="flex gap-1 w-[100%] sm:w-[30%] justify-center item-center bg-white p-4">
-        <div class="flex">
-          <% if current_user.avatar.present? %>
-            <%= image_tag(current_user.avatar, class: "w-[50px] h-[50px] rounded-full self-center", alt:'' )%>
-          <% end %>
-        </div>
-        <div class="flex flex-col p-2 gap-0.5">
-          <p class="text-md font-medium">
-            <span class="text-sm"><%= current_user.first_name %></span>
-            <span class="text-sm"><%= current_user.last_name %></span>
-          </p>
-          <%= link_to 'Edit Profile', edit_user_registration_path, class: 'text-blue-500 hover:text-blue-700' %>
-          <%= link_to "Create Your services", new_service_path, class: 'text-blue-500 hover:text-blue-700' %>
-        </div>
+<section class="w-full flex flex-col justify-start overflow-y-auto py-5 px-4 bg-slate-300 min-h-screen">
+  <div class="flex flex-col gap-4 sm:flex-row sm:gap-2">
+    <!-- User Profile Section -->
+    <div class="flex flex-col gap-2 bg-white p-4 rounded-lg sm:flex-row sm:w-1/3">
+      <div class="flex items-center">
+        <% if current_user.avatar.present? %>
+          <%= image_tag(current_user.avatar, class: "w-12 h-12 rounded-full", alt: '' ) %>
+        <% end %>
       </div>
-      <div class="bg-white w-[100%] flex flex-col flex-1 sm:flex-row h-auto justify-around p-4 sm:h-24 relative">
-        <p class="bg-yellow-400 absolute top-[-10px] left-7 rounded-lg p-1 text-xs uppercase">Refer a friend, get $20</p>
-        <div class="w-[70%] self-center">
-          <p class="text-pretty text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus non modi amet doloribus ipsam nulla corrupti nobis.</p>
-        </div>
-        <div class="w-[30%] flex justify-center items-center px-2">
-          <button class="flex-1 rounded-full antialiased border capitalize">Invite a friend</button>
-        </div>
+      <div class="flex flex-col justify-center p-2">
+        <p class="text-lg font-medium">
+          <span class="text-md capitalize"><%= current_user.first_name %> <%= current_user.last_name %></span>
+        </p>
+        <%= link_to 'Edit Profile', edit_user_registration_path, class: 'text-blue-500 hover:text-blue-700' %>
+        <%= link_to "Create Your Services", new_service_path, class: 'text-blue-500 hover:text-blue-700' %>
+      </div>
+    </div>
+
+    <!-- Referral Section -->
+    <div class="bg-white flex flex-col sm:flex-row items-center p-4 rounded-lg sm:w-2/3 relative">
+      <p class="bg-yellow-400 absolute top-[-10px] left-4 rounded-lg p-1 text-xs uppercase">Refer a friend, get $20</p>
+      <div class="flex-1 text-center sm:text-left">
+        <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus non modi amet doloribus ipsam nulla corrupti nobis.</p>
+      </div>
+      <div class="flex justify-center items-center mt-2 sm:mt-0 sm:ml-4">
+        <button class="rounded-full border px-4 py-2 capitalize">Invite a friend</button>
       </div>
     </div>
   </div>
-  <div class="sm:flex sm:w-[100%] xs:w-[90%] gap-2 self-center mt-4">
-    <div class="flex flex-col justify-center gap-2 items-center sm:w-[30%] h-full bg-white p-4">
-      <div class="flex justify-between w-[100%] items-center">
-        <div>
-          <p>Wallet</p>
-          <span class="text-blue-400 text-sm font-bold">Apply Promo Code</span>
-        </div>
-        <p>$0.00</p>
+
+  <div class="flex flex-col sm:flex-row sm:gap-2 mt-4">
+    <!-- Wallet Section -->
+    <div class="flex flex-col gap-2 bg-white p-4 rounded-lg sm:w-1/3">
+      <div class="flex justify-between items-center">
+        <p class="text-lg font-medium">Wallet</p>
+        <span class="text-blue-500 text-sm font-bold cursor-pointer">Apply Promo Code</span>
       </div>
-      <div class="flex justify-between w-[100%] bg-slate-300 rounded-md p-1">
+      <div class="flex justify-between bg-slate-300 rounded-md p-2">
         <p>Upcoming Earnings</p>
         <p>$0.00</p>
       </div>
-      <div class="flex justify-between w-[100%] bg-red-100 rounded-md p-1">
+      <div class="flex justify-between bg-red-100 rounded-md p-2">
         <p>Processing Payments</p>
         <p>$0.00</p>
       </div>
-      <div class="flex justify-between w-[100%]">
-        <p class="text-xs">Funds from the past bookings begin processing 48 hours after they end</p>
-      </div>
-      <button class="rounded-full antialiased border capitalize w-[100%] text-sm">manage payout methods</button>
-      <button class="rounded-full antialiased border capitalize w-[100%] text-sm">add or modify a payment method</button>
-      <button class="rounded-full antialiased border capitalize w-[100%] text-sm">view payment and promo code</button>
+      <p class="text-xs mt-2">Funds from the past bookings begin processing 48 hours after they end</p>
+      <button class="rounded-full border mt-2 py-2 text-sm capitalize w-full">Manage Payout Methods</button>
+      <button class="rounded-full border mt-2 py-2 text-sm capitalize w-full">Add or Modify a Payment Method</button>
+      <button class="rounded-full border mt-2 py-2 text-sm capitalize w-full">View Payment and Promo Code</button>
     </div>
-    <div class="w-[70%] bg-white flex flex-col gap-2 h-auto p-4">
-      <div class="flex flex-col justify-start">
-        <h3 class="font-bold">Your Pets</h3>
+
+    <!-- Pets Section -->
+    <div class="bg-white p-4 rounded-lg flex flex-col gap-4 sm:w-2/3">
+      <div>
+        <h3 class="font-bold text-xl">Your Pets</h3>
         <p class="text-sm">Add your pets or edit their info</p>
       </div>
-      <div class="h-[100%] w-[100%]">
-        <div class="flex flex-col justify-center items-center h-[200px] w-[200px] border">
-          <span>+</span>
-          <span>Add a pet</span>
+      <div class="flex justify-center items-center border-2 border-dashed border-gray-400 rounded-md p-4">
+        <div class="text-center">
+          <span class="text-4xl">+</span>
+          <p>Add a pet</p>
         </div>
       </div>
     </div>
