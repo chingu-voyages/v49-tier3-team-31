@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :find_service, only: [:new, :create]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :find_service, only: [:new, :create, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
 
   def new
     @review = @service.reviews.build
@@ -18,6 +18,10 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @review = Service.find(params[:service_id])
+  end
+
   private
 
   def find_service
@@ -25,6 +29,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:rating, :comment)
+    params.require(:review).permit(:rating, :comment, :first_name)
   end
 end

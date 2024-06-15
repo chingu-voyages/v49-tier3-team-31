@@ -1,5 +1,17 @@
-<h1>Show Review Page</h1>
-<div class="review">
-  <p><strong>Rating:</strong> <%= review.rating %></p>
-  <p><strong>Comment:</strong> <%= review.comment %></p>
+<div class="relative p-10 rounded-xl bg-blue-800">
+  <p class="font-medium text-center text-white">
+    <div class="w-10 h-10 rounded-full ring-4 ring-white  text-white text-center pt-2">
+      <%= review.rating %>
+    </div>
+    <div class="text-sm text-white mt-6 opacity-70">
+      <%= review.comment %>
+    </div>
+    <div class=" z-10 space-x-4 text-white opacity-50 mt-4">
+      <% if user = current_user %>
+        <%= current_user.first_name%>
+      <% else %>
+        <%= review.user %>
+      <%end %>
+    </div>
+  </p>
 </div>

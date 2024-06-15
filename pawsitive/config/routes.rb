@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :services, only: [:index, :show, :new, :create] do
-    resources :reviews, only: [:new, :create]
+    resources :reviews, only: [:new, :create, :edit]
   end
 
   resources :notifications, only: [:index, :show] do

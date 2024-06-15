@@ -67,12 +67,13 @@
       </ul>
     </div>
     <div class="p-4">
-      <h3 class="text-2xl font-bold text-gray-900 mb-4">Reviews</h3>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4"> Service Reviews</h3>
       <div class="flex gap-2">
         <%= render @service.reviews %>
       </div>
-      <div class="">
-        <%= link_to "Add Reviews", new_service_review_path(@service)%>
-      </div>
-    </div>
-  </section>
+    </br>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <%= link_to "Add Reviews", new_service_review_path(@service)%>
+    </button>
+  </div>
+</section>
