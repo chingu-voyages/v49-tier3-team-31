@@ -16,7 +16,6 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @services = @booking.service.member.services
     @booking.user_id = current_user.id
 
     if @booking.save
