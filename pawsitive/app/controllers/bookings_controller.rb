@@ -16,14 +16,15 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @services = Service.find_by(id: params[:member_id])
+    @services = @booking.service.member.services
     @booking.user_id = current_user.id
 
     if @booking.save
       redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
     else
+      @member = @booking.service.member
       flash[:alert] = @booking.errors.full_messages.to_sentence
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
