@@ -21,7 +21,7 @@
             Contact <%= @member.first_name %> <%= @member.last_name.slice(0, 1) %>.
           </button>
         <% else %>
-          <%= link_to new_booking_path(user_id: @member.id), class: "w-full text-center rounded-full bg-blue-600 text-white antialiased font-bold hover:bg-blue-800 py-2 capitalize" do %>
+          <%= link_to new_booking_path(user_id: @member.id), class: "btn-primary capitalize" do %>
             Contact <%= @member.first_name %> <%= @member.last_name.slice(0, 1) %>.
           <% end %>
         <% end %>
@@ -91,7 +91,7 @@
             <%= render @service.reviews %>
           <% end %>
           </br>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded sm:w-1/2 sm:mx-auto">
+          <button class="btn-primary">
             <%= link_to "Add Reviews", new_service_review_path(@service)%>
           </button>
         </div>
