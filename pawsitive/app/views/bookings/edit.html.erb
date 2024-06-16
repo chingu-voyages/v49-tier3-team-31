@@ -10,56 +10,45 @@
         </ul>
       </div>
     <% end %>
-
     <h2 class="text-center font-semibold text-xl">
       Edit Booking
     </h2>
-
     <div class="mb-4">
       <%= f.label :service_id, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.collection_select :service_id, @services, :id, :service_type, { prompt: "Select Service" }, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :num_of_pets, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.number_field :num_of_pets, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :start_date, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.date_field :start_date, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :end_date, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.date_field :end_date, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :start_time, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.time_field :start_time, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :end_time, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.time_field :end_time, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :phone_number, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.telephone_field :phone_number, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
-
     <div class="mb-4">
       <%= f.label :message, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.text_area :message, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows: 4 %>
     </div>
-
     <div class="mb-4">
       <%= f.label :recieve_updates, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.check_box :recieve_updates, class: "form-checkbox h-5 w-5 text-gray-600" %>
     </div>
-
     <div class="flex items-center justify-between">
       <%= f.submit "Update Booking", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
     </div>

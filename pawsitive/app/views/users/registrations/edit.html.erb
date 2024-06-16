@@ -3,36 +3,29 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'bg-transparent shadow-2xl rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
       <h2 class="text-center text-2xl">Edit <%= resource_name.to_s.humanize %></h2>
       <%= render "devise/shared/error_messages", resource: resource %>
-
       <%
         label_classes = "block text-sm font-bold mb-2 #{alert ? "text-red-500" : "text-gray-700"}"
         input_classes = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline #{alert ? "border-red-500" : nil}"
       %>
-
       <div class="mb-4">
         <%= f.label :first_name, "First Name", class: label_classes %>
         <%= f.text_field :first_name, autofocus: true, autocomplete: "firstname", placeholder: "First Name", class: input_classes %>
       </div>
-
       <div class="mb-4">
         <%= f.label :last_name, "Last Name", class: label_classes %>
         <%= f.text_field :last_name, autofocus: true, autocomplete: "lastname", placeholder: "Last Name", class: input_classes %>
       </div>
-
       <div class="mb-4">
         <%= f.label :bio, "Bio", class: label_classes %>
         <%= f.text_field :bio, autofocus: true, autocomplete: "bio", placeholder: "Write something...", class: input_classes %>
       </div>
-
       <div class="mb-4">
         <%= f.label :email, "Email", class: label_classes %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: input_classes %>
       </div>
-
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div class="block text-sm font-normal mb-2 text-gray-700">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
-
       <div class="mb-4">
         <%= f.label :password, "Password", class: label_classes %>
         <i class="block text-sm font-normal mb-2 text-gray-700">(leave blank if you don't want to change it)</i>
@@ -41,79 +34,65 @@
           <em class="block text-sm font-normal mb-2 text-gray-700"><%= @minimum_password_length %> characters minimum</em>
         <% end %>
       </div>
-
       <div class="mb-4">
         <%= f.label :password_confirmation, "Confirm Password", class: label_classes %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password", class: input_classes %>
       </div>
-
       <div class="mb-4">
         <%= f.label :current_password, "Current Password", class: label_classes %>
         <i class="block text-sm font-normal mb-2 text-gray-700">(we need your current password to confirm your changes)</i>
         <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Password", class: input_classes %>
       </div>
-
       <div class="mb-4">
         <%= f.label :avatar, "Avatar", class: label_classes %>
         <%= f.file_field :avatar, class: "shadow appearance-none border rounded w-full leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
-
       <div class="mb-4">
         <%= f.label :photos, "Photos", class: label_classes %>
         <%= f.file_field :photos, multiple: true, class: "shadow appearance-none border rounded w-full leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
-
       <div class="mb-4">
         <%= f.label :price, "Price", class: label_classes %>
         <%= f.number_field :price, in: 1..200, step: :any, class: input_classes %>
       </div>
-
       <div class="mb-4">
         <%= f.label :address, "Address", class: label_classes %>
         <%= f.text_field :address, class: input_classes %>
       </div>
       <%= turbo_frame_tag :cs_select do %>
-      <div data-controller="form-element">
-        <%= f.button "Validate", formaction: registration_path(resource_name), formmethod: :put, data: { form_element_target: "remoteBtn", turbo_frame: :cs_select } %>
-        
-        <div class="mb-4">
-          <%= f.label :country, "Country", class: label_classes %>
+        <div data-controller="form-element">
+          <%= f.button "Validate", formaction: registration_path(resource_name), formmethod: :put, data: { form_element_target: "remoteBtn", turbo_frame: :cs_select } %>
+          <div class="mb-4">
+            <%= f.label :country, "Country", class: label_classes %>
             <%= f.select :country, @user.countries.invert , {include_blank: true}, { class: input_classes, data: {action: "change->form-element#autosubmit"}} %>
+          </div>
+          <div class="mb-4">
+            <%= f.label :state, "State", class: label_classes %>
+            <%= f.select :state,  @user.states.invert, {include_blank: true}, { data: {action: "change->form-element#autosubmit"}} %>
+          </div>
+          <div class="mb-4">
+            <%= f.label :city, "City", class: label_classes %>
+            <%= f.select :city, @user.cities, {include_blank: true}, {} %>
+          </div>
         </div>
-
-        <div class="mb-4">
-          <%= f.label :state, "State", class: label_classes %>
-          <%= f.select :state,  @user.states.invert, {include_blank: true}, { data: {action: "change->form-element#autosubmit"}} %>
-        </div>
-
-        <div class="mb-4">
-          <%= f.label :city, "City", class: label_classes %>
-          <%= f.select :city, @user.cities, {include_blank: true}, {} %>
-        </div>  
-      </div>
       <% end %>
-
       <div class="mb-4">
         <%= f.label :zip_or_postcode, "Zip_or_Postcode", class: label_classes %>
         <%= f.text_field :zip, autofocus: true, autocomplete: "zip_or_postcode", placeholder: "zip_or_postcode", class: input_classes %>
       </div>
-
       <div class="mb-4">
         <%= f.label :birthday, "Birthday", class: label_classes %>
         <%= f.date_field :birthday, autofocus: true, autocomplete: "birthday", placeholder: "birthday", class: input_classes %>
       </div>
-
       <div class="flex items-center justify-between content-end">
         <%= f.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white hover:cursor-pointer font-bold py-2 px-4 mr-6 rounded focus:outline-none focus:shadow-outline" %>
         <%= link_to "Back", :back, class: "font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline border border-gray-500" %>
       </div>
     <% end %>
   </div>
-
   <div class="h-full w-full sm:max-w-sm sm:mx-auto self-center">
     <div class="bg-transparent shadow-2xl rounded px-8 pt-6 pb-8 mb-4 w-full">
       <h3 class="text-center">Cancel my account</h3>
-
       <div class="mb-4 flex flex-col justify-center items-center">
         Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
       </div>

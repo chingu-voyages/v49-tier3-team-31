@@ -93,6 +93,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_144715) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "reviews", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "service_id", null: false
+    t.uuid "user_id", null: false
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_reviews_on_service_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id", null: false
     t.string "service_type"
@@ -138,5 +149,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_144715) do
   add_foreign_key "bookings", "users"
   add_foreign_key "messages", "bookings"
   add_foreign_key "notifications", "users"
+  add_foreign_key "reviews", "services"
+  add_foreign_key "reviews", "users"
   add_foreign_key "services", "users", column: "member_id"
 end
