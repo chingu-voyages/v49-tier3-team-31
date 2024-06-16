@@ -1,0 +1,44 @@
+<div class="flex flex-col justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'bg-white shadow-2xl rounded px-8 pt-6 pb-8'}) do |f| %>
+      <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-700 mb-4">Sign up</h2>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <% label_classes = "block text-sm font-medium leading-6 text-gray-700" %>
+      <% input_classes = "block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder-gray-400 sm:text-sm sm:leading-5" %>
+      <div class="mb-4">
+        <%= f.label :first_name, "First Name", class: label_classes %>
+        <%= f.text_field :first_name, autofocus: true, placeholder: "First Name", class: input_classes %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :last_name, "Last Name", class: label_classes %>
+        <%= f.text_field :last_name, autofocus: true, placeholder: "Last Name", class: input_classes %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :email, "Email", class: label_classes %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: input_classes %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :password, "Password", class: label_classes %>
+        <% if @minimum_password_length %>
+          <em class="block text-sm font-normal mb-2 text-gray-700">(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: input_classes %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :password_confirmation, "Confirm password", class: label_classes %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password", class: input_classes %>
+      </div>
+      <div class="mb-4 flex flex-col">
+        <%= f.label :role, "Role", class: label_classes %>
+        <%= f.select :role, options_for_select(['user', 'member'],selected: 'user'),
+        class: "peer h-full w-full rounded-2xl border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 empty:!bg-gray-900 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 flex-1" %>
+      </div>
+      <div class="flex flex-col justify-between items-center">
+        <%= f.submit "Register", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4" %>
+        <div class="flex flex-col gap-1">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>New Notification</h1>
+    <p>Hello, <%= @receiver.first_name %>!</p>
+
+    <% if @notification.present? %>
+      <% if @notification.notifiable.is_a?(Booking) %>
+        <% booking = @notification.notifiable %>
+        <p>You have a new booking request for <%= booking.service.service_type %> service.</p>
+      <% elsif @notification.notifiable.is_a?(Message) %>
+        <% message = @notification.notifiable %>
+        <p>You have a new message: <%= message.content %></p>
+      <% else %>
+        <p>You have a new notification.</p>
+      <% end %>
+    <% end %>
+  </body>
+</html>
+
+
+

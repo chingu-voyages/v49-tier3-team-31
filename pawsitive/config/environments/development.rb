@@ -34,10 +34,21 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+# Devise mailer configuration
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               Rails.application.credentials.dig(:google_smtp, :domain),
+  user_name:            Rails.application.credentials.dig(:google_smtp, :email),
+  password:             Rails.application.credentials.dig(:google_smtp, :password),
+  authentication:       'plain',
+  enable_starttls_auto: true  }
 
   config.action_mailer.perform_caching = false
 

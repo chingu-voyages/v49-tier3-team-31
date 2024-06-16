@@ -1,9 +1,181 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+test_users = [
+  {
+    first_name: "James",
+    last_name: "Cameron",
+    role: 1,
+    email: "james@cameron.com",
+    price: 5,
+    bio: "I love dogs and making movie!",
+    country: "US",
+    state: "CA",
+    city: "Los Angeles"
+  },
+  {
+    first_name: "Jane",
+    last_name: "Doe",
+    role: 1,
+    email: "jane@doe.com",
+    price: 4,
+    bio: "All dogs are beautiful, but puppies are the best!",
+    country: "US",
+    state: "CA",
+    city: "San Francisco"
+  },
+  {
+    first_name: "Dale",
+    last_name: "Henderson",
+    role: 1,
+    email: "dale@henderson.com",
+    price: 3,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "San Diego"
+  },
+  {
+    first_name: "Julie",
+    last_name: "Cook",
+    role: 1,
+    email: "julie@cook.com",
+    price: 4,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Sacramento"
+  },
+  {
+    first_name: "Tony",
+    last_name: "Sutton",
+    role: 1,
+    email: "tony@sutton.com",
+    price: 5,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Santa Clara"
+  },
+  {
+    first_name: "Jeff",
+    last_name: "Vargas",
+    role: 1,
+    email: "jeff@vargas.com",
+    price: 6,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Fresno"
+  },
+  {
+    first_name: "Derek",
+    last_name: "Chambers",
+    role: 1,
+    email: "derek@chambers.com",
+    price: 7,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Bakersfield"
+  },
+  {
+    first_name: "Danny",
+    last_name: "Holland",
+    role: 1,
+    email: "danny@holland.com",
+    price: 8,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Oakland"
+  },
+  {
+    first_name: "Nora",
+    last_name: "Hanson",
+    role: 1,
+    email: "nora@hanson.com",
+    price: 9,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Long Beach"
+  },
+  {
+    first_name: "Hannah",
+    last_name: "Porter",
+    role: 1,
+    email: "hannah@porter.com",
+    price: 10,
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel metus id mi volutpat vehicula id id augue. Phasellus venenatis enim est, id accumsan nisl varius vitae. Sed nulla quam, ultrices sollicitudin suscipit vel, pulvinar vel tortor. Suspendisse accumsan non justo et vestibulum. Maecenas placerat consequat elit non cursus.",
+    country: "US",
+    state: "CA",
+    city: "Irvine"
+  }
+]
+
+def create_services(user, i)
+  boarding_prices = {
+    "small_dog" => (i + 1) * 5,
+    "medium_dog" => (i + 1) * 7,
+    "large_dog" => (i + 1) * 9,
+    "giant_dog" => (i + 1) * 11
+  }
+  day_care_prices = {
+    "small_dog" => (i + 1) * 4,
+    "medium_dog" => (i + 1) * 6,
+    "large_dog" => (i + 1) * 8,
+    "giant_dog" => (i + 1) * 10
+  }
+  
+  availability = {
+    "Monday" => { "open" => "08:00", "close" => "20:00" },
+    "Tuesday" => { "open" => "08:00", "close" => "20:00" },
+    "Wednesday" => { "open" => "08:00", "close" => "20:00" },
+    "Thursday" => { "open" => "08:00", "close" => "20:00" },
+    "Friday" => { "open" => "08:00", "close" => "20:00" }
+  }
+  
+  sizes = {
+    "small" => "0-15 lb",
+    "medium" => "16-40 lb",
+    "large" => "41-100 lb",
+    "giant" => "101+ lb"
+  }
+
+  ["Day Care", "Boarding", "Sitting"].each do |service_type|
+    service = Service.find_or_create_by!(
+      service_type: service_type,
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      price: service_type == "Boarding" ? boarding_prices : day_care_prices,
+      size: sizes,
+      member_id: user.id,
+      pet_number: i < 2 ? (i+1).to_s : "3+",
+      pet_types: i > 5 ? ["dog", "cat"] : ["dog"]
+    )
+  
+    create_availabilities(service, availability)
+  end
+end
+
+def create_availabilities(service, availability)
+  availability.each do |day, times|
+    start_time = Time.parse(times["open"])
+    end_time = Time.parse(times["close"])
+    (Date.today..(Date.today + 30)).each do |date|
+      next unless date.strftime('%A') == day
+
+      Availability.find_or_create_by!(
+        service: service,
+        date: date,
+        start_time: start_time,
+        end_time: end_time,
+        available: true
+      )
+    end
+  end
+end
+
+test_users.each_with_index do |user_data, i|
+  user = User.find_or_create_by!({**user_data, latitude: (37.4241 - i / 100.0).round(4), longitude: (-122.1660 + i / 100.0).round(4) }) do |new_user|
+    new_user.password = "randomuser#{i + 1}"
+  end
+  create_services(user, i)
+end

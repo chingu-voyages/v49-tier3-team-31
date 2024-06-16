@@ -1,0 +1,52 @@
+<div class="top-0 py-1 lg:py-2 w-full bg-transparent z-50 dark:bg-gray-900 relative" >
+  <nav class="z-10 sticky top-0 left-0 right-0 max-w-4xl xl:max-w-5xl mx-auto px-5 py-2.5 lg:border-none lg:py-4" data-controller="navbar">
+    <div class="flex items-center justify-center lg:justify-between">
+      <div class="flex items-center space-x-2">
+        <%= link_to "Pawsitive", root_path, class: "text-black dark:text-white font-bold text-2xl" %>
+      </div>
+      <div class="absolute bg-white top-full right-0 left-0 h-lvh pt-8 scale-x-0 lg:static lg:h-auto lg:pt-0 lg:bg-transparent lg:scale-x-100 transition-transform duration-500 origin-right" data-navbar-target="menu">
+        <div class="flex items-center gap-6 flex-col lg:flex-row lg:gap-x-2">
+          <% if user_signed_in? %>
+            <%= link_to "Profile",profile_users_path(current_user.id), class: "btn-primary"%>
+            <%= button_to "Logout", destroy_user_session_path, class: "btn-primary", method: :delete %>
+            <p class="text-black lg:text-white"><%= current_user.email %></p>
+            <div class="nav-item ms-1" id="notifications">
+              <%= link_to notifications_path, class: 'nav-link' do %>
+                <i class="fa-regular fa-bell font-bold text-2xl text-black lg:text-white"></i>
+                <% if @unread_notifications_count.to_i > 0 %>
+                <span id="notification-count" class="inline-flex items-center bg-red-500 rounded-md px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10 h-[14px] absolute" data-notification-target="count">
+                  <%= @unread_notifications_count if @unread_notifications_count.to_i > 0 %>
+                </span>
+                <% end %>
+              <% end %>
+            </div>
+          <% else %>
+            <%= link_to "Sign up", new_user_registration_path, class: "btn-secondary text-black lg:text-white" %>
+            <%= link_to "Login", new_user_session_path, class: "btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="flex items-center justify-center absolute right-4 lg:hidden">
+        <button class="focus:outline-none text-slate-200 dark:text-white " data-action="navbar#toggle">
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+            class="text-2xl text-slate-800 dark:text-white focus:outline-none active:scale-110 active:text-red-500"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+</div>
