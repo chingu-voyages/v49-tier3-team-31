@@ -22,7 +22,6 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
     else
-      @member = @booking.service.member
       flash[:alert] = @booking.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
