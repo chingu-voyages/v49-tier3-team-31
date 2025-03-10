@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many_attached :photos, service: :amazon, dependent: :destroy
-  has_one_attached :avatar, service: :amazon, dependent: :destroy
+  has_many_attached :photos, service: :cloudflare, dependent: :destroy
+  has_one_attached :avatar, service: :cloudflare, dependent: :destroy
 
   has_many :services, foreign_key: "member_id"
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'

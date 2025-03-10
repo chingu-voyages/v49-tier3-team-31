@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_06_144715) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_06_034932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -73,13 +73,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_144715) do
   end
 
   create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "sender_id"
-    t.uuid "receiver_id"
-    t.text "content"
+    t.uuid "sender_id", null: false
+    t.uuid "receiver_id", null: false
+    t.text "content", null: false
     t.uuid "booking_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
